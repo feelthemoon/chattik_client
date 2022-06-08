@@ -1,0 +1,32 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-form {
+    width: 600px;
+    padding: 15px 45px;
+    box-shadow: 0 0 10px @main-blue;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  &-recover {
+    text-align: left;
+  }
+  .error-message {
+    color: @red;
+    text-align: left;
+    margin-top: 5px;
+    display: block;
+    font-size: 14px;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.1s linear;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+}
