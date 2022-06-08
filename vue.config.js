@@ -2,9 +2,21 @@
 const path = require("path");
 
 module.exports = {
-  lintOnSave: false,
+  lintOnSave: true,
   runtimeCompiler: true,
   productionSourceMap: false,
+  css: {
+    extract: true,
+    loaderOptions: {
+      less: {
+        globalVars: {
+          "main-blue": "#1890ff",
+          red: "#fd5a5a",
+          green: "#52c41a",
+        },
+      },
+    },
+  },
   configureWebpack(config) {
     const IS_VENDOR = /[\\/]node_modules[\\/]/;
     config.optimization.splitChunks = {
@@ -27,10 +39,6 @@ module.exports = {
       },
     };
     return {
-      output: {
-        hotUpdateChunkFilename: "hot/hot-update.js",
-        hotUpdateMainFilename: "hot/hot-update.json",
-      },
       resolve: {
         alias: {
           "@": path.resolve(__dirname, "./src/"),

@@ -1,9 +1,14 @@
 import { createI18n } from "vue-i18n";
 import { WritableComputedRef } from "vue";
+import en from "@/langs/en.json";
 
 const i18n = createI18n({
   locale: "en",
   legacy: false,
+  globalInjection: true,
+  messages: {
+    en,
+  },
   missing: (key: string, item: string) => {
     item = "";
     return item;

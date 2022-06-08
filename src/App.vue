@@ -1,30 +1,43 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <component :is="layout"></component>
 </template>
 
+<script lang="ts">
+import EmptyLayout from "@/layouts/Empty.vue";
+import { computed, defineComponent } from "vue";
+import { useRoute } from "vue-router";
+
+export default defineComponent({
+  components: {
+    EmptyLayout,
+  },
+  setup() {
+    const route = useRoute();
+    const layout = computed(() => `${route.meta.layout || "empty"}-layout`);
+
+    return {
+      layout,
+    };
+  },
+});
+</script>
+
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  font-family: "Roboto", sans-serif !important;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#app,
+.main,
+.layout {
+  height: 100%;
+}
+.layout__inner {
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

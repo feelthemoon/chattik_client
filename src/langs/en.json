@@ -1,1 +1,31 @@
-{}
+{
+  "pages": {
+    "signin": {
+      "title": "Log in to your account",
+      "email_placeholder": "Your email",
+      "password_placeholder": "Your password",
+      "button_text": "Signin",
+      "recover_password_link": "Forgot password?",
+      "link_signup": "Don't have account yet?"
+    },
+    "signup": {
+      "title": "Create new account",
+      "email_placeholder": "Your email",
+      "username_placeholder": "Your username",
+      "password_placeholder": "Your password",
+      "button_text": "Signup",
+      "link_signin": "Already have account?"
+    }
+  },
+  "validation": {
+    "email_invalid": "Invalid email",
+    "password_required": "Password can't be empty",
+    "password_invalid": "Invalid password",
+    "username_invalid": "Minimum 5 characters",
+    "max_length": "Field can't contains more 255 symbols",
+    "password_lowercase": "At least one lowercase character",
+    "password_uppercase": "At least one uppercase character",
+    "password_numeric": "At least one numeric",
+    "password_minlength": "Minimum 8 characters"
+  }
+}
