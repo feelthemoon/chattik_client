@@ -13,5 +13,3 @@ export default defineComponent({
   components: { SignupForm },
 });
 </script>
-
-<style scoped></style>
