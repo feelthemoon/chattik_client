@@ -12,16 +12,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import AppHeader from "@/components/Header.vue";
 
 export default defineComponent({
   name: "Empty",
+  components: {
+    AppHeader,
+  },
 });
 </script>
 
-<style lang="less">
-.layout--empty {
-  background-color: rgba(217, 226, 248, 0.99);
-}
+<style lang="less" scoped>
 .slide-fade {
   &-enter-active {
     transition: all 0.3s ease-out;
