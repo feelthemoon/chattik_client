@@ -93,7 +93,9 @@
       }}</a-button>
     </a-form-item>
     <a-form-item class="mb-0">
-      <router-link to="/">{{ $t("pages.signup.link_signin") }}</router-link>
+      <router-link to="/signin">{{
+        $t("pages.signup.link_signin")
+      }}</router-link>
     </a-form-item>
   </a-form>
 </template>

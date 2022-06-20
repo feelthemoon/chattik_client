@@ -6,7 +6,7 @@ const Signup = () =>
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: "/signin",
     name: "SigninPage",
     component: Signin,
     meta: {
