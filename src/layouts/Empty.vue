@@ -1,5 +1,6 @@
 <template>
   <div class="layout layout--empty">
+    <app-header></app-header>
     <div class="layout__inner">
       <router-view v-slot="{ Component }">
         <Transition name="slide-fade" mode="out-in">
