@@ -8,11 +8,11 @@ class _AuthApi extends _BaseApi {
   }
 
   public signin(data: ISigninData): Promise<AxiosResponse> {
-    return this.executeRequest("signin", "POST", false, data);
+    return this.executeRequest("auth/signin", "POST", true, data);
   }
 
   public signup(data: ISignupData): Promise<AxiosResponse> {
-    return this.executeRequest("signup", "POST", false, data);
+    return this.executeRequest("auth/signup", "POST", true, data);
   }
 }
 

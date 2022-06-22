@@ -14,7 +14,7 @@ const RootActions: ActionTree<IRootState, IRootState> = {
     if (error instanceof AxiosError) {
       commit("UPDATE_ERRORS", {
         namespace,
-        statusCode: error.status,
+        statusCode: error.response?.status,
         message: error.response?.data?.message ?? "Unknown Error",
       });
     } else {

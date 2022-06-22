@@ -17,13 +17,24 @@ const RootMutations: MutationTree<IRootState> = {
   },
   UPDATE_ERRORS(state: IRootState, error: IError) {
     const errorId = state.errors[state.errors.length - 1]?.id ?? 0;
-    state.errors.push({ ...error, id: errorId + 1 });
+    const hasNamespaceAlreadyErrors = state.errors.find(
+      (e) => e.namespace === error.namespace
+    );
+    if (hasNamespaceAlreadyErrors?.id) {
+      hasNamespaceAlreadyErrors.message = error.message;
+    } else {
+      state.errors.push({ ...error, id: errorId + 1 });
+    }
   },
   DELETE_ERROR(state: IRootState, error: IError) {
     state.errors.splice(
       state.errors.findIndex((e) => e.id === error.id),
       1
     );
+  },
+
+  CLEAR_ERRORS(state: IRootState) {
+    state.errors = [];
   },
 };
 
