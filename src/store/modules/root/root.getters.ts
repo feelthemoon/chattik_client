@@ -7,8 +7,12 @@ const RootGetters: GetterTree<IRootState, IRootState> = {
     state.loading.find((l) => l.namespace === namespace)?.loading,
   errorByNamespace:
     (state: IRootState) =>
-    (namespace: string): IError | undefined =>
-      state.errors.find((e) => e.namespace === namespace),
+    (namespace: string, statusCode?: number): IError | undefined =>
+      state.errors.find((e) =>
+        statusCode
+          ? e.namespace === namespace && e.statusCode === statusCode
+          : e.namespace === namespace
+      ),
 };
 
 export default RootGetters;

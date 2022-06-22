@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import store from "@/store";
+
 const Signin = () =>
   import(/* webpackChunkName: "signin_page" */ "@/views/Signin.vue");
 const Signup = () =>
@@ -28,4 +30,8 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach(async (_, __, next) => {
+  await store.commit("CLEAR_ERRORS");
+  next();
+});
 export default router;

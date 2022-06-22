@@ -12,7 +12,7 @@ const AuthActions: ActionTree<unknown, IRootState> = {
         { root: true }
       );
       const res = await API_AUTH.signin(data);
-      commit("SET_TOKEN", res.headers.authorization);
+      commit("SET_TOKEN", res.headers.authorization, { root: true });
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
@@ -36,7 +36,7 @@ const AuthActions: ActionTree<unknown, IRootState> = {
         { root: true }
       );
       const res = await API_AUTH.signup(data);
-      commit("SET_TOKEN", res.headers.authorization);
+      commit("SET_TOKEN", res.headers.authorization, { root: true });
     } catch (e: unknown) {
       dispatch(
         "updateErrors",

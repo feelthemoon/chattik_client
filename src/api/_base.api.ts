@@ -2,7 +2,7 @@ import axios, { AxiosRequestHeaders, AxiosResponse, Method } from "axios";
 
 export class _BaseApi {
   private readonly _baseUrl: string;
-  private _prefix = "api/v1/";
+  private _prefix = "api/";
 
   constructor() {
     this._baseUrl = process.env.VUE_APP_API_URL;
@@ -25,6 +25,7 @@ export class _BaseApi {
       headers,
       data,
       params,
+      withCredentials: true,
     });
   }
 }

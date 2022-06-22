@@ -7,7 +7,9 @@
         :placeholder="$t('pages.signup.email_placeholder')"
         size="large"
         :class="{
-          'error-field': v$.user.email.$dirty && v$.user.email.$invalid,
+          'error-field':
+            (v$.user.email.$dirty && v$.user.email.$invalid) ||
+            invalidEmailError,
         }"
       >
         <template #prefix>
@@ -20,6 +22,9 @@
           v-if="v$.user.email.$dirty && v$.user.email.$invalid"
           >{{ $t("validation.email_invalid") }}</span
         >
+        <span class="error-message" v-else-if="invalidEmailError">{{
+          invalidEmailError?.text
+        }}</span>
       </Transition>
     </a-form-item>
     <a-form-item class="mb-3">
@@ -28,9 +33,11 @@
         :placeholder="$t('pages.signup.username_placeholder')"
         size="large"
         show-count
-        :maxlength="255"
+        :maxlength="25"
         :class="{
-          'error-field': v$.user.username.$dirty && v$.user.username.$invalid,
+          'error-field':
+            (v$.user.username.$dirty && v$.user.username.$invalid) ||
+            invalidUsernameError,
         }"
       >
         <template #prefix>
@@ -43,6 +50,9 @@
           v-if="v$.user.username.$dirty && v$.user.username.$invalid"
           >{{ $t("validation.username_invalid") }}</span
         >
+        <span class="error-message" v-else-if="invalidUsernameError">{{
+          invalidUsernameError?.text
+        }}</span>
       </Transition>
     </a-form-item>
     <a-form-item class="mb-3">
@@ -88,9 +98,13 @@
       </Transition>
     </a-form-item>
     <a-form-item class="mb-1">
-      <a-button type="primary" html-type="submit" size="large">{{
-        $t("pages.signup.button_text")
-      }}</a-button>
+      <a-button
+        :loading="isPendingRequest"
+        type="primary"
+        html-type="submit"
+        size="large"
+        >{{ $t("pages.signup.button_text") }}</a-button
+      >
     </a-form-item>
     <a-form-item class="mb-0">
       <router-link to="/signin">{{
@@ -101,7 +115,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, ComputedRef, defineComponent, ref } from "vue";
 import {
   Button,
   Form,
@@ -126,6 +140,7 @@ import {
 } from "@vuelidate/validators";
 import { useI18n } from "vue-i18n";
 import { useStore } from "@/store";
+import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
 import useVuelidate from "@vuelidate/core";
 
 export default defineComponent({
@@ -193,14 +208,38 @@ export default defineComponent({
     const signup = async () => {
       await v$.value.$validate();
       if (!v$.value.$invalid) {
-        await store.dispatch("auth/signup");
+        await store.dispatch("auth/signup", user.value);
       }
     };
+
+    const apiErrors: ComputedRef<IError> = computed(() =>
+      store.getters.errorByNamespace(Namespaces.AUTH_NAMESPACE_SIGNUP, 400)
+    );
+
+    const invalidEmailError: ComputedRef<IAPIError | undefined> = computed(() =>
+      apiErrors.value?.message.find(
+        (message: IAPIError) => message.type === "invalid_data_email"
+      )
+    );
+
+    const invalidUsernameError: ComputedRef<IAPIError | undefined> = computed(
+      () =>
+        apiErrors.value?.message.find(
+          (message: IAPIError) => message.type === "invalid_data_username"
+        )
+    );
+
+    const isPendingRequest: ComputedRef<boolean | undefined> = computed(() =>
+      store.getters.loadingByNamespace(Namespaces.AUTH_NAMESPACE_SIGNUP)
+    );
 
     return {
       user,
       v$,
       passwordChecks,
+      invalidEmailError,
+      invalidUsernameError,
+      isPendingRequest,
       signup,
     };
   },
