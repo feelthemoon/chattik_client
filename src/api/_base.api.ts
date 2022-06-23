@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders, AxiosResponse, Method } from "axios";
+import store from "@/store";
 
 export class _BaseApi {
   private readonly _baseUrl: string;
@@ -18,6 +19,8 @@ export class _BaseApi {
     const url = hasPrefix
       ? this._baseUrl + this._prefix + route
       : this._baseUrl + route;
+
+    store.commit("CLEAR_ERRORS");
 
     return axios.request({
       url,
