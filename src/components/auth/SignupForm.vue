@@ -3,8 +3,8 @@
     <h1 class="mb-5">{{ $t("pages.signup.title") }}</h1>
     <a-form-item class="mb-3">
       <a-input
-        v-model:value="user.email"
-        :placeholder="$t('pages.signup.email_placeholder')"
+        v-model:value.trim="user.email"
+        :placeholder="$t('common.email_placeholder')"
         size="large"
         :class="{
           'error-field':
@@ -29,8 +29,8 @@
     </a-form-item>
     <a-form-item class="mb-3">
       <a-input
-        v-model:value="user.username"
-        :placeholder="$t('pages.signup.username_placeholder')"
+        v-model:value.trim="user.username"
+        :placeholder="$t('common.username_placeholder')"
         size="large"
         show-count
         :maxlength="25"
@@ -77,8 +77,8 @@
           </p>
         </template>
         <a-input-password
-          v-model:value="user.password"
-          :placeholder="$t('pages.signup.password_placeholder')"
+          v-model:value.trim="user.password"
+          :placeholder="$t('common.password_placeholder')"
           size="large"
           :class="{
             'error-field': v$.user.password.$dirty && v$.user.password.$invalid,

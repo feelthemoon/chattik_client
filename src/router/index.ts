@@ -5,6 +5,8 @@ const Signin = () =>
   import(/* webpackChunkName: "signin_page" */ "@/views/Signin.vue");
 const Signup = () =>
   import(/* webpackChunkName: "signup_page" */ "@/views/Signup.vue");
+const RecoverPassword = () =>
+  import(/* webpackChunkName: "recover_page" */ "@/views/RecoverPassword.vue");
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,6 +21,14 @@ const routes: Array<RouteRecordRaw> = [
     path: "/signup",
     name: "SignupPage",
     component: Signup,
+    meta: {
+      layout: "empty",
+    },
+  },
+  {
+    path: "/recover",
+    name: "RecoverPassword",
+    component: RecoverPassword,
     meta: {
       layout: "empty",
     },

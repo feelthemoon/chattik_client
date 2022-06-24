@@ -1,6 +1,8 @@
 export enum Namespaces {
   AUTH_NAMESPACE_SIGNIN = "signin_namespace",
   AUTH_NAMESPACE_SIGNUP = "signup_namespace",
+  AUTH_NAMESPACE_LOGOUT = "logout_namespace",
+  AUTH_NAMESPACE_RECOVER = "recover_namespace",
 }
 
 export interface IAPIError {

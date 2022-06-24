@@ -3,8 +3,8 @@
     <h1 class="mb-5">{{ $t("pages.signin.title") }}</h1>
     <a-form-item class="mb-3">
       <a-input
-        v-model:value="user.email"
-        :placeholder="$t('pages.signin.email_placeholder')"
+        v-model:value.trim="user.email"
+        :placeholder="$t('common.email_placeholder')"
         size="large"
         :class="{
           'error-field':
@@ -29,8 +29,8 @@
     </a-form-item>
     <a-form-item class="mb-1">
       <a-input-password
-        v-model:value="user.password"
-        :placeholder="$t('pages.signin.password_placeholder')"
+        v-model:value.trim="user.password"
+        :placeholder="$t('common.password_placeholder')"
         size="large"
         :class="{
           'error-field':
@@ -54,7 +54,7 @@
       </Transition>
     </a-form-item>
     <a-form-item class="auth-recover mb-1">
-      <router-link to="/recover-password">{{
+      <router-link to="/recover">{{
         $t("pages.signin.recover_password_link")
       }}</router-link>
     </a-form-item>
