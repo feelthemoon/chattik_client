@@ -1,0 +1,39 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .text {
+    text-align: center;
+  }
+  &__title {
+    font-size: 120px;
+  }
+  &__subtitle {
+    font-size: 25px;
+    margin-top: -20px;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .back {
+      a {
+        color: white;
+        padding: 10px 35px;
+        background-color: @main-blue;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .3s;
+        &:hover {
+          color: black;
+          border-color: @main-blue;
+          background-color: transparent;
+          transition: .3s;
+        }
+      }
+    }
+  }
+}
