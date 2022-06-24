@@ -14,6 +14,20 @@ class _AuthApi extends _BaseApi {
   public signup(data: ISignupData): Promise<AxiosResponse> {
     return this.executeRequest("auth/signup", "POST", true, data);
   }
+
+  public refreshAccessToken(): Promise<AxiosResponse> {
+    return this.executeRequest("auth/refresh", "POST", true);
+  }
+
+  public logout(accessToken: string): Promise<AxiosResponse> {
+    return this.executeRequest("auth/logout", "POST", true, null, null, {
+      authorization: accessToken,
+    });
+  }
+
+  public recoverPassword(email: string): Promise<AxiosResponse> {
+    return this.executeRequest("auth/recover", "POST", true, { email });
+  }
 }
 
 export default new _AuthApi();

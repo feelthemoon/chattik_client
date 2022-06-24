@@ -51,6 +51,52 @@ const AuthActions: ActionTree<unknown, IRootState> = {
       );
     }
   },
+
+  async logout({ dispatch, rootGetters }) {
+    try {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.AUTH_NAMESPACE_LOGOUT, loading: true },
+        { root: true }
+      );
+      await API_AUTH.logout(rootGetters.token);
+    } catch (e: unknown) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.AUTH_NAMESPACE_LOGOUT },
+        { root: true }
+      );
+    } finally {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.AUTH_NAMESPACE_LOGOUT, loading: false },
+        { root: true }
+      );
+    }
+  },
+
+  async recover({ dispatch }, email: string) {
+    try {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.AUTH_NAMESPACE_RECOVER, loading: true },
+        { root: true }
+      );
+      await API_AUTH.recoverPassword(email);
+    } catch (e: unknown) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.AUTH_NAMESPACE_RECOVER },
+        { root: true }
+      );
+    } finally {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.AUTH_NAMESPACE_RECOVER, loading: false },
+        { root: true }
+      );
+    }
+  },
 };
 
 export default AuthActions;
