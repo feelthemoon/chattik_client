@@ -1,6 +1,10 @@
 import { ActionTree } from "vuex";
 import { IRootState, Namespaces } from "@/store/modules/root/root.types";
-import { ISigninData, ISignupData } from "@/store/modules/auth/auth.types";
+import {
+  IRecoverData,
+  ISigninData,
+  ISignupData,
+} from "@/store/modules/auth/auth.types";
 import { API_AUTH } from "@/api";
 
 const AuthActions: ActionTree<unknown, IRootState> = {
@@ -75,14 +79,14 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     }
   },
 
-  async recover({ dispatch }, email: string) {
+  async recover({ dispatch }, data: IRecoverData) {
     try {
       dispatch(
         "updateLoading",
         { namespace: Namespaces.AUTH_NAMESPACE_RECOVER, loading: true },
         { root: true }
       );
-      await API_AUTH.recoverPassword(email);
+      await API_AUTH.recoverPassword(data);
     } catch (e: unknown) {
       dispatch(
         "updateErrors",

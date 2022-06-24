@@ -141,6 +141,7 @@ import {
 import { useI18n } from "vue-i18n";
 import { useStore } from "@/store";
 import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
+import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
 
 export default defineComponent({
@@ -205,11 +206,14 @@ export default defineComponent({
     };
 
     const v$ = useVuelidate(rules, { user });
+    const reCaptcha = useReCaptcha();
 
     const signup = async () => {
       await v$.value.$validate();
       if (!v$.value.$invalid) {
-        await store.dispatch("auth/signup", user.value);
+        await reCaptcha?.recaptchaLoaded();
+        const recaptchaToken = await reCaptcha?.executeRecaptcha("signup");
+        await store.dispatch("auth/signup", { ...user.value, recaptchaToken });
         if (token.value) {
           emit("showVerify");
         }

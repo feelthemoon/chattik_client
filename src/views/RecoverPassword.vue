@@ -38,6 +38,7 @@ import { MailTwoTone } from "@ant-design/icons-vue";
 import { defineComponent, ref } from "vue";
 import { useStore } from "@/store";
 import { required, email as emailValidateRule } from "@vuelidate/validators";
+import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
 
 export default defineComponent({
@@ -57,10 +58,17 @@ export default defineComponent({
       email: { required, emailValidateRule },
     };
 
+    const reCaptcha = useReCaptcha();
+
     const recover = async () => {
       await v$.value.$validate();
       if (!v$.value.$invalid) {
-        await store.dispatch("auth/recover", email.value);
+        await reCaptcha?.recaptchaLoaded();
+        const recaptchaToken = await reCaptcha?.executeRecaptcha("signup");
+        await store.dispatch("auth/recover", {
+          email: email.value,
+          recaptchaToken,
+        });
       }
     };
 
