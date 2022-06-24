@@ -19,6 +19,15 @@
     "recover": {
       "title": "Recover your password",
       "button_text": "Submit"
+    },
+    "verify": {
+      "title": "Verify your account",
+      "text": "An email has been sent to your email address with a link to verify your account."
+    },
+    "404": {
+      "title": "404",
+      "subtitle": "Not Found",
+      "link_text": "Go main page"
     }
   },
   "validation": {

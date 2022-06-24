@@ -158,7 +158,7 @@ export default defineComponent({
     CloseCircleTwoTone,
     CheckCircleTwoTone,
   },
-  setup() {
+  setup(_, { emit }) {
     const user = ref({
       email: "",
       username: "",
@@ -167,6 +167,7 @@ export default defineComponent({
 
     const store = useStore();
     const { t } = useI18n();
+    const token: ComputedRef<string> = computed(() => store.getters.token);
 
     const passwordChecks = ref([
       {
@@ -209,6 +210,9 @@ export default defineComponent({
       await v$.value.$validate();
       if (!v$.value.$invalid) {
         await store.dispatch("auth/signup", user.value);
+        if (token.value) {
+          emit("showVerify");
+        }
       }
     };
 
