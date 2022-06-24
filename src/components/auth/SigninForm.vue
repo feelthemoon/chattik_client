@@ -82,6 +82,7 @@ import { MailTwoTone, LockTwoTone } from "@ant-design/icons-vue";
 import { email as emailValidator, required } from "@vuelidate/validators";
 import { useStore } from "@/store";
 import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
+import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
 
 export default defineComponent({
@@ -110,11 +111,17 @@ export default defineComponent({
     };
 
     const v$ = useVuelidate(rules, { user });
+    const reCaptcha = useReCaptcha();
 
     const signin = async () => {
       await v$.value.$validate();
       if (!v$.value.$invalid) {
-        await store.dispatch("auth/signin", user.value);
+        await reCaptcha?.recaptchaLoaded();
+        const recaptchaToken = await reCaptcha?.executeRecaptcha("signin");
+        await store.dispatch("auth/signin", {
+          ...user.value,
+          recaptchaToken,
+        });
       }
     };
 

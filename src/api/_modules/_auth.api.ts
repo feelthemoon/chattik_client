@@ -1,6 +1,10 @@
 import { _BaseApi } from "@/api/_base.api";
 import { AxiosResponse } from "axios";
-import { ISigninData, ISignupData } from "@/store/modules/auth/auth.types";
+import {
+  IRecoverData,
+  ISigninData,
+  ISignupData,
+} from "@/store/modules/auth/auth.types";
 
 class _AuthApi extends _BaseApi {
   constructor() {
@@ -25,7 +29,7 @@ class _AuthApi extends _BaseApi {
     });
   }
 
-  public recoverPassword(email: string): Promise<AxiosResponse> {
+  public recoverPassword(email: IRecoverData): Promise<AxiosResponse> {
     return this.executeRequest("auth/recover", "POST", true, { email });
   }
 }
