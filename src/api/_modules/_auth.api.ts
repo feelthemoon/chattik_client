@@ -29,8 +29,8 @@ class _AuthApi extends _BaseApi {
     });
   }
 
-  public recoverPassword(email: IRecoverData): Promise<AxiosResponse> {
-    return this.executeRequest("auth/recover", "POST", true, { email });
+  public recoverPassword(data: IRecoverData): Promise<AxiosResponse> {
+    return this.executeRequest("auth/recover", "POST", true, data);
   }
 }
 
