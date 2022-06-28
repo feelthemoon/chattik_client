@@ -64,7 +64,9 @@ export default defineComponent({
       await v$.value.$validate();
       if (!v$.value.$invalid) {
         await reCaptcha?.recaptchaLoaded();
-        const recaptchaToken = await reCaptcha?.executeRecaptcha("signup");
+        const recaptchaToken = await reCaptcha?.executeRecaptcha(
+          "recoverPassword"
+        );
         await store.dispatch("auth/recover", {
           email: email.value,
           recaptchaToken,
