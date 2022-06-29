@@ -20,6 +20,10 @@ const VerifyAccount = () =>
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/",
+    redirect: { path: "/im" },
+  },
+  {
     path: "/signin",
     name: "SigninPage",
     component: Signin,

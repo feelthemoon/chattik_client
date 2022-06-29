@@ -1,5 +1,8 @@
 import { ActionTree } from "vuex";
 import {
+  AlertIcons,
+  IAlert,
+  IAPIError,
   ILoading,
   IRootState,
   Namespaces,
@@ -8,7 +11,7 @@ import { AxiosError } from "axios";
 
 const RootActions: ActionTree<IRootState, IRootState> = {
   updateErrors(
-    { commit },
+    { commit, dispatch },
     { error, namespace }: { error: unknown; namespace: Namespaces }
   ): void {
     if (error instanceof AxiosError) {
@@ -17,12 +20,38 @@ const RootActions: ActionTree<IRootState, IRootState> = {
         statusCode: error.response?.status,
         message: error.response?.data?.message ?? "Unknown Error",
       });
+
+      const messages: IAPIError[] = error.response?.data.message.filter(
+        (message: IAPIError) =>
+          message.type === "common_error" || message.type === "captcha_error"
+      );
+
+      if (messages.length > 0)
+        messages.forEach((message) => {
+          dispatch("updateAlerts", {
+            type: "error",
+            message:
+              message.type === "common_error"
+                ? "Error"
+                : "Captcha Error. Are you robot?",
+            description: message.text,
+            showIcon: true,
+            iconName:
+              message.type === "common_error"
+                ? AlertIcons.ERROR_ICON_COMMON
+                : AlertIcons.ERROR_ICON_CAPTCHA,
+          });
+        });
     } else {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   },
   updateLoading({ commit }, loading: ILoading): void {
     commit("UPDATE_LOADING", loading);
+  },
+  updateAlerts({ commit }, alert: IAlert): void {
+    commit("UPDATE_ALERTS", alert);
   },
 };
 
