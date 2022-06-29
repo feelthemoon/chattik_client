@@ -8,7 +8,8 @@
           :placeholder="$t('common.email_placeholder')"
           size="large"
           :class="{
-            'error-field': v$.email.$dirty && v$.email.$invalid,
+            'error-field':
+              (v$.email.$dirty && v$.email.$invalid) || invalidEmail,
           }"
         >
           <template #prefix>
@@ -21,12 +22,19 @@
             v-if="v$.email.$dirty && v$.email.$invalid"
             >{{ $t("validation.email_invalid") }}</span
           >
+          <span class="error-message" v-else-if="invalidEmail">{{
+            invalidEmail?.text
+          }}</span>
         </Transition>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" size="large">{{
-          $t("pages.recover.button_text")
-        }}</a-button>
+        <a-button
+          :loading="isPendingRequest"
+          type="primary"
+          html-type="submit"
+          size="large"
+          >{{ $t("pages.recover.button_text") }}</a-button
+        >
       </a-form-item>
     </a-form>
   </main>
@@ -35,11 +43,12 @@
 <script lang="ts">
 import { Button, Form, FormItem, Input } from "ant-design-vue";
 import { MailTwoTone } from "@ant-design/icons-vue";
-import { defineComponent, ref } from "vue";
+import { computed, ComputedRef, defineComponent, ref } from "vue";
 import { useStore } from "@/store";
 import { required, email as emailValidateRule } from "@vuelidate/validators";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
+import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
 
 export default defineComponent({
   name: "RecoverPassword",
@@ -60,6 +69,18 @@ export default defineComponent({
 
     const reCaptcha = useReCaptcha();
 
+    const apiErrors: ComputedRef<IError> = computed(() =>
+      store.getters.errorByNamespace(Namespaces.AUTH_NAMESPACE_RECOVER, 400)
+    );
+    const invalidEmail: ComputedRef<IAPIError | undefined> = computed(() =>
+      apiErrors.value?.message.find(
+        (message) => message.type === "invalid_email"
+      )
+    );
+
+    const isPendingRequest: ComputedRef<boolean | undefined> = computed(() =>
+      store.getters.loadingByNamespace(Namespaces.AUTH_NAMESPACE_RECOVER)
+    );
     const recover = async () => {
       await v$.value.$validate();
       if (!v$.value.$invalid) {
@@ -79,6 +100,8 @@ export default defineComponent({
     return {
       email,
       v$,
+      invalidEmail,
+      isPendingRequest,
       recover,
     };
   },

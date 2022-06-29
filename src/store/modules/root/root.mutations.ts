@@ -1,4 +1,9 @@
-import { IError, ILoading, IRootState } from "@/store/modules/root/root.types";
+import {
+  IAlert,
+  IError,
+  ILoading,
+  IRootState,
+} from "@/store/modules/root/root.types";
 import { MutationTree } from "vuex";
 
 const RootMutations: MutationTree<IRootState> = {
@@ -29,6 +34,18 @@ const RootMutations: MutationTree<IRootState> = {
   DELETE_ERROR(state: IRootState, error: IError) {
     state.errors.splice(
       state.errors.findIndex((e) => e.id === error.id),
+      1
+    );
+  },
+
+  UPDATE_ALERTS(state: IRootState, alert: IAlert) {
+    const alertId = state.alerts[state.alerts.length - 1]?.id ?? 0;
+    state.alerts.push({ ...alert, id: alertId + 1 });
+  },
+
+  REMOVE_ALERT(state: IRootState, alertId: number) {
+    state.alerts.splice(
+      state.alerts.findIndex((alert) => alert.id === alertId),
       1
     );
   },

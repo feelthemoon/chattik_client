@@ -1554,13 +1554,6 @@
   dependencies:
     source-map "^0.6.1"
 
-"@types/vue-i18n@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@types/vue-i18n/-/vue-i18n-7.0.0.tgz#ace0de742b3a0398b6fa6b3956d6e583377c3081"
-  integrity sha512-4e3EvN4k+B6eTq1qWDFW1wpzCgz+8nNCn6LAQTkcRoGJx9rVO5iYzyEogFTi9RwBJ588+Rx0nUwRFjKUYPe/BQ==
-  dependencies:
-    vue-i18n "*"
-
 "@types/webpack-dev-server@^3.11.0":
   version "3.11.6"
   resolved "https://registry.yarnpkg.com/@types/webpack-dev-server/-/webpack-dev-server-3.11.6.tgz#d8888cfd2f0630203e13d3ed7833a4d11b8a34dc"
@@ -12021,7 +12014,7 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@*, vue-i18n@^9.1.10:
+vue-i18n@^9.1.10:
   version "9.1.10"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-9.1.10.tgz#7ad516b89ba28debb90fc4181c9a2faec9ad97f9"
   integrity sha512-jpr7gV5KPk4n+sSPdpZT8Qx3XzTcNDWffRlHV/cT2NUyEf+sEgTTmLvnBAibjOFJ0zsUyZlVTAWH5DDnYep+1g==

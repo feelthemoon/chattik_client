@@ -26,8 +26,8 @@
     },
     "404": {
       "title": "404",
-      "subtitle": "Not Found",
-      "link_text": "Go main page"
+      "subtitle": "Sorry, the page you visited does not exist.",
+      "link_text": "Back Home"
     }
   },
   "validation": {
