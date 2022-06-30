@@ -56,26 +56,7 @@
       </Transition>
     </a-form-item>
     <a-form-item class="mb-3">
-      <a-tooltip placement="left" trigger="focus" color="white">
-        <template #title>
-          <p
-            class="password-check"
-            v-for="(check, index) in passwordChecks"
-            :key="index"
-          >
-            <check-circle-two-tone
-              :style="{ fontSize: '18px' }"
-              v-if="check.checker"
-              two-tone-color="#52c41a"
-            ></check-circle-two-tone>
-            <close-circle-two-tone
-              two-tone-color="red"
-              :style="{ fontSize: '18px' }"
-              v-else
-            ></close-circle-two-tone>
-            <span class="password-check__text ml-1">{{ check.text }}</span>
-          </p>
-        </template>
+      <password-tooltip :password="user.password">
         <a-input-password
           v-model:value.trim="user.password"
           :placeholder="$t('common.password_placeholder')"
@@ -88,7 +69,7 @@
             <lock-two-tone></lock-two-tone>
           </template>
         </a-input-password>
-      </a-tooltip>
+      </password-tooltip>
       <Transition name="fade">
         <span
           class="error-message"
@@ -116,21 +97,8 @@
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent, ref } from "vue";
-import {
-  Button,
-  Form,
-  FormItem,
-  Input,
-  InputPassword,
-  Tooltip,
-} from "ant-design-vue";
-import {
-  MailTwoTone,
-  LockTwoTone,
-  IdcardTwoTone,
-  CloseCircleTwoTone,
-  CheckCircleTwoTone,
-} from "@ant-design/icons-vue";
+import { Button, Form, FormItem, Input, InputPassword } from "ant-design-vue";
+import { MailTwoTone, LockTwoTone, IdcardTwoTone } from "@ant-design/icons-vue";
 import {
   email as emailValidator,
   required,
@@ -138,26 +106,24 @@ import {
   maxLength,
   helpers,
 } from "@vuelidate/validators";
-import { useI18n } from "vue-i18n";
 import { useStore } from "@/store";
 import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
+import PasswordTooltip from "@/components/PasswordTooltip.vue";
 
 export default defineComponent({
   name: "SignupForm",
   components: {
+    PasswordTooltip,
     AForm: Form,
     AFormItem: FormItem,
     AInput: Input,
     AButton: Button,
     AInputPassword: InputPassword,
-    ATooltip: Tooltip,
     MailTwoTone,
     LockTwoTone,
     IdcardTwoTone,
-    CloseCircleTwoTone,
-    CheckCircleTwoTone,
   },
   setup(_, { emit }) {
     const user = ref({
@@ -167,27 +133,7 @@ export default defineComponent({
     });
 
     const store = useStore();
-    const { t } = useI18n();
     const token: ComputedRef<string> = computed(() => store.getters.token);
-
-    const passwordChecks = ref([
-      {
-        text: t("validation.password_lowercase"),
-        checker: computed(() => /[a-z]/.test(user.value.password)),
-      },
-      {
-        text: t("validation.password_uppercase"),
-        checker: computed(() => /[A-Z]/.test(user.value.password)),
-      },
-      {
-        text: t("validation.password_numeric"),
-        checker: computed(() => /\d/.test(user.value.password)),
-      },
-      {
-        text: t("validation.password_minlength"),
-        checker: computed(() => user.value.password.length >= 8),
-      },
-    ]);
 
     const validationPassword = helpers.regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,255})/
@@ -244,7 +190,6 @@ export default defineComponent({
     return {
       user,
       v$,
-      passwordChecks,
       invalidEmailError,
       invalidUsernameError,
       isPendingRequest,

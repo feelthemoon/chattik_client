@@ -8,15 +8,21 @@ import {
 import store from "@/store";
 
 const Signin = () =>
-  import(/* webpackChunkName: "signin_page" */ "@/views/Signin.vue");
+  import(/* webpackChunkName: "signin_page" */ "@/views/auth/Signin.vue");
 const Signup = () =>
-  import(/* webpackChunkName: "signup_page" */ "@/views/Signup.vue");
+  import(/* webpackChunkName: "signup_page" */ "@/views/auth/Signup.vue");
 const RecoverPassword = () =>
-  import(/* webpackChunkName: "recover_page" */ "@/views/RecoverPassword.vue");
+  import(
+    /* webpackChunkName: "recover_page" */ "@/views/auth/RecoverPassword.vue"
+  );
 const NotFound = () =>
   import(/* webpackChunkName: "not_found_page" */ "@/views/NotFound.vue");
 const VerifyAccount = () =>
-  import(/* webpackChunkName: "verify_page" */ "@/views/Verify.vue");
+  import(/* webpackChunkName: "verify_page" */ "@/views/auth/Verify.vue");
+const CreateNewPassword = () =>
+  import(
+    /* webpackChunkName: "create_new_password_page" */ "@/views/CreateNewPassword.vue"
+  );
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -60,6 +66,14 @@ const routes: Array<RouteRecordRaw> = [
       } else {
         next({ name: "SignupPage" });
       }
+    },
+  },
+  {
+    path: "/new-password",
+    name: "CreateNewPassword",
+    component: CreateNewPassword,
+    meta: {
+      layout: "empty",
     },
   },
   {

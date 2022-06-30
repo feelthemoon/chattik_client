@@ -3,6 +3,7 @@ export enum Namespaces {
   AUTH_NAMESPACE_SIGNUP = "signup_namespace",
   AUTH_NAMESPACE_LOGOUT = "logout_namespace",
   AUTH_NAMESPACE_RECOVER = "recover_namespace",
+  USER_NAMESPACE_NEW_PASSWORD = "new_password_namespace",
 }
 
 export enum AlertIcons {
