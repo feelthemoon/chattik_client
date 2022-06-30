@@ -6,6 +6,7 @@ import {
   RouteRecordRaw,
 } from "vue-router";
 import store from "@/store";
+import { Namespaces } from "@/store/modules/root/root.types";
 
 const Signin = () =>
   import(/* webpackChunkName: "signin_page" */ "@/views/auth/Signin.vue");
@@ -74,6 +75,21 @@ const routes: Array<RouteRecordRaw> = [
     component: CreateNewPassword,
     meta: {
       layout: "empty",
+    },
+    async beforeEnter(from, _, next: NavigationGuardNext) {
+      if (!from.query.token) {
+        next({ name: "NotFound" });
+      }
+      await store.dispatch("auth/verifyRecoverToken", from.query.token);
+      if (
+        store.getters.errorByNamespace(
+          Namespaces.AUTH.NAMESPACE_RECOVER_TOKEN_VERIFY
+        )
+      ) {
+        next({ name: "NotFound" });
+      } else {
+        next();
+      }
     },
   },
   {

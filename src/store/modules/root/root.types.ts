@@ -1,11 +1,15 @@
-export enum Namespaces {
-  AUTH_NAMESPACE_SIGNIN = "signin_namespace",
-  AUTH_NAMESPACE_SIGNUP = "signup_namespace",
-  AUTH_NAMESPACE_LOGOUT = "logout_namespace",
-  AUTH_NAMESPACE_RECOVER = "recover_namespace",
-  USER_NAMESPACE_NEW_PASSWORD = "new_password_namespace",
+export abstract class Namespaces {
+  static readonly AUTH = {
+    NAMESPACE_SIGNIN: "signin_namespace",
+    NAMESPACE_SIGNUP: "signup_namespace",
+    NAMESPACE_LOGOUT: "logout_namespace",
+    NAMESPACE_RECOVER: "recover_namespace",
+    NAMESPACE_RECOVER_TOKEN_VERIFY: "recover_token_verify",
+  };
+  static readonly USER = {
+    NAMESPACE_NEW_PASSWORD: "new_password_namespace",
+  };
 }
-
 export enum AlertIcons {
   SUCCESS_ICON = "smile-outlined",
   ERROR_ICON_COMMON = "frown-outlined",

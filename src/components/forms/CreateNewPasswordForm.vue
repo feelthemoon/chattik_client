@@ -116,7 +116,7 @@ export default defineComponent({
       }
     };
     const isPendingRequest: ComputedRef<boolean | undefined> = computed(() =>
-      store.getters.loadingByNamespace(Namespaces.USER_NAMESPACE_NEW_PASSWORD)
+      store.getters.loadingByNamespace(Namespaces.USER.NAMESPACE_NEW_PASSWORD)
     );
 
     return {

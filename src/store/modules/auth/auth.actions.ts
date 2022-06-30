@@ -12,7 +12,7 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     try {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_SIGNIN, loading: true },
+        { namespace: Namespaces.AUTH.NAMESPACE_SIGNIN, loading: true },
         { root: true }
       );
       const res = await API_AUTH.signin(data);
@@ -20,13 +20,13 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.AUTH_NAMESPACE_SIGNIN },
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_SIGNIN },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_SIGNIN, loading: false },
+        { namespace: Namespaces.AUTH.NAMESPACE_SIGNIN, loading: false },
         { root: true }
       );
     }
@@ -36,7 +36,7 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     try {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_SIGNUP, loading: true },
+        { namespace: Namespaces.AUTH.NAMESPACE_SIGNUP, loading: true },
         { root: true }
       );
       const res = await API_AUTH.signup(data);
@@ -44,13 +44,13 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.AUTH_NAMESPACE_SIGNUP },
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_SIGNUP },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_SIGNUP, loading: false },
+        { namespace: Namespaces.AUTH.NAMESPACE_SIGNUP, loading: false },
         { root: true }
       );
     }
@@ -60,20 +60,20 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     try {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_LOGOUT, loading: true },
+        { namespace: Namespaces.AUTH.NAMESPACE_LOGOUT, loading: true },
         { root: true }
       );
       await API_AUTH.logout(rootGetters.token);
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.AUTH_NAMESPACE_LOGOUT },
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_LOGOUT },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_LOGOUT, loading: false },
+        { namespace: Namespaces.AUTH.NAMESPACE_LOGOUT, loading: false },
         { root: true }
       );
     }
@@ -83,20 +83,32 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     try {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_RECOVER, loading: true },
+        { namespace: Namespaces.AUTH.NAMESPACE_RECOVER, loading: true },
         { root: true }
       );
       await API_AUTH.recoverPassword(data);
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.AUTH_NAMESPACE_RECOVER },
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_RECOVER },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.AUTH_NAMESPACE_RECOVER, loading: false },
+        { namespace: Namespaces.AUTH.NAMESPACE_RECOVER, loading: false },
+        { root: true }
+      );
+    }
+  },
+
+  async verifyRecoverToken({ dispatch }, token: string) {
+    try {
+      await API_AUTH.verifyRecoverToken(token);
+    } catch (e) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_RECOVER_TOKEN_VERIFY },
         { root: true }
       );
     }

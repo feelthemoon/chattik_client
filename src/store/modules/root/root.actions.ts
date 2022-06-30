@@ -14,7 +14,10 @@ const RootActions: ActionTree<IRootState, IRootState> = {
     { commit, dispatch },
     { error, namespace }: { error: unknown; namespace: Namespaces }
   ): void {
-    if (error instanceof AxiosError) {
+    if (
+      error instanceof AxiosError &&
+      Array.isArray(error.response?.data.message)
+    ) {
       commit("UPDATE_ERRORS", {
         namespace,
         statusCode: error.response?.status,
@@ -26,7 +29,7 @@ const RootActions: ActionTree<IRootState, IRootState> = {
           message.type === "common_error" || message.type === "captcha_error"
       );
 
-      if (messages.length > 0)
+      if (messages.length > 0) {
         messages.forEach((message) => {
           dispatch("updateAlerts", {
             type: "error",
@@ -42,9 +45,15 @@ const RootActions: ActionTree<IRootState, IRootState> = {
                 : AlertIcons.ERROR_ICON_CAPTCHA,
           });
         });
+      }
     } else {
-      // eslint-disable-next-line no-console
-      console.error(error);
+      dispatch("updateAlerts", {
+        type: "error",
+        message: "Error",
+        description: "Unknown Error",
+        showIcon: true,
+        iconName: AlertIcons.ERROR_ICON_COMMON,
+      });
     }
   },
   updateLoading({ commit }, loading: ILoading): void {

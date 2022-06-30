@@ -18,7 +18,7 @@ const UsersActions: ActionTree<IUsersState, IRootState> = {
     try {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.USER_NAMESPACE_NEW_PASSWORD, loading: true },
+        { namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD, loading: true },
         { root: true }
       );
       await API_USERS.createNewPassword(request.data, request.recoverToken);
@@ -36,13 +36,13 @@ const UsersActions: ActionTree<IUsersState, IRootState> = {
     } catch (e) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.USER_NAMESPACE_NEW_PASSWORD },
+        { error: e, namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.USER_NAMESPACE_NEW_PASSWORD, loading: false },
+        { namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD, loading: false },
         { root: true }
       );
     }
