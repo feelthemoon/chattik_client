@@ -126,7 +126,7 @@ export default defineComponent({
     };
 
     const apiErrors: ComputedRef<IError> = computed(() =>
-      store.getters.errorByNamespace(Namespaces.AUTH_NAMESPACE_SIGNIN, 400)
+      store.getters.errorByNamespace(Namespaces.AUTH.NAMESPACE_SIGNIN, 400)
     );
 
     const invalidSigninDataError: ComputedRef<IAPIError | undefined> = computed(
@@ -137,7 +137,7 @@ export default defineComponent({
     );
 
     const isPendingRequest: ComputedRef<boolean | undefined> = computed(() =>
-      store.getters.loadingByNamespace(Namespaces.AUTH_NAMESPACE_SIGNIN)
+      store.getters.loadingByNamespace(Namespaces.AUTH.NAMESPACE_SIGNIN)
     );
 
     return {

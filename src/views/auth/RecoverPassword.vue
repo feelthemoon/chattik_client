@@ -70,7 +70,7 @@ export default defineComponent({
     const reCaptcha = useReCaptcha();
 
     const apiErrors: ComputedRef<IError> = computed(() =>
-      store.getters.errorByNamespace(Namespaces.AUTH_NAMESPACE_RECOVER, 400)
+      store.getters.errorByNamespace(Namespaces.AUTH.NAMESPACE_RECOVER, 400)
     );
     const invalidEmail: ComputedRef<IAPIError | undefined> = computed(() =>
       apiErrors.value?.message.find(
@@ -79,7 +79,7 @@ export default defineComponent({
     );
 
     const isPendingRequest: ComputedRef<boolean | undefined> = computed(() =>
-      store.getters.loadingByNamespace(Namespaces.AUTH_NAMESPACE_RECOVER)
+      store.getters.loadingByNamespace(Namespaces.AUTH.NAMESPACE_RECOVER)
     );
     const recover = async () => {
       await v$.value.$validate();

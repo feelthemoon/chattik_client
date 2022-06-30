@@ -32,6 +32,12 @@ class _AuthApi extends _BaseApi {
   public recoverPassword(data: IRecoverData): Promise<AxiosResponse> {
     return this.executeRequest("auth/recover", "POST", true, data);
   }
+
+  public verifyRecoverToken(recoverToken: string): Promise<AxiosResponse> {
+    return this.executeRequest("auth/verify-recover", "GET", true, null, {
+      token: recoverToken,
+    });
+  }
 }
 
 export default new _AuthApi();

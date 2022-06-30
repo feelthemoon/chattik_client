@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import SignupForm from "@/components/auth/SignupForm.vue";
+import SignupForm from "@/components/forms/SignupForm.vue";
 
 export default defineComponent({
   name: "Signup",

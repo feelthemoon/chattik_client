@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import SigninForm from "@/components/auth/SigninForm.vue";
+import SigninForm from "@/components/forms/SigninForm.vue";
 
 export default defineComponent({
   name: "Auth",

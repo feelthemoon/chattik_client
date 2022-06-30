@@ -19,7 +19,7 @@ import { InfoCircleTwoTone } from "@ant-design/icons-vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "SubmitRegistration",
+  name: "Verify",
   components: {
     InfoCircleTwoTone,
   },
