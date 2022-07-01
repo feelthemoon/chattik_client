@@ -59,8 +59,13 @@ const RootActions: ActionTree<IRootState, IRootState> = {
   updateLoading({ commit }, loading: ILoading): void {
     commit("UPDATE_LOADING", loading);
   },
-  updateAlerts({ commit }, alert: IAlert): void {
-    commit("UPDATE_ALERTS", alert);
+  updateAlerts({ commit, state }, alert: IAlert): number {
+    const alertId = state.alerts[state.alerts.length - 1]?.id ?? 0;
+    commit("UPDATE_ALERTS", { ...alert, id: alertId + 1 });
+    return setTimeout(
+      () => commit("REMOVE_ALERT", alertId + 1),
+      alert.duration ?? 3000
+    );
   },
 };
 

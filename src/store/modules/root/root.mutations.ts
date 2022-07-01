@@ -31,16 +31,9 @@ const RootMutations: MutationTree<IRootState> = {
       state.errors.push({ ...error, id: errorId + 1 });
     }
   },
-  DELETE_ERROR(state: IRootState, error: IError) {
-    state.errors.splice(
-      state.errors.findIndex((e) => e.id === error.id),
-      1
-    );
-  },
 
   UPDATE_ALERTS(state: IRootState, alert: IAlert) {
-    const alertId = state.alerts[state.alerts.length - 1]?.id ?? 0;
-    state.alerts.push({ ...alert, id: alertId + 1 });
+    state.alerts.push(alert);
   },
 
   REMOVE_ALERT(state: IRootState, alertId: number) {
