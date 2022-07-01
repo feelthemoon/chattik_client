@@ -30,6 +30,7 @@ export interface IAlert {
   message: string;
   description: string;
   type: string;
+  duration?: number;
   showIcon?: boolean;
   iconName?: AlertIcons;
 }

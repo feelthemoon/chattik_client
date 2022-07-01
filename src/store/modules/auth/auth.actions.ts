@@ -1,5 +1,9 @@
 import { ActionTree } from "vuex";
-import { IRootState, Namespaces } from "@/store/modules/root/root.types";
+import {
+  AlertIcons,
+  IRootState,
+  Namespaces,
+} from "@/store/modules/root/root.types";
 import {
   IRecoverData,
   ISigninData,
@@ -87,6 +91,17 @@ const AuthActions: ActionTree<unknown, IRootState> = {
         { root: true }
       );
       await API_AUTH.recoverPassword(data);
+      dispatch(
+        "updateAlerts",
+        {
+          type: "success",
+          message: "Success",
+          description: "Recover link sent to your email",
+          showIcon: true,
+          iconName: AlertIcons.SUCCESS_ICON,
+        },
+        { root: true }
+      );
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
