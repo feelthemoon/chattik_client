@@ -24,7 +24,8 @@ const CreateNewPassword = () =>
   import(
     /* webpackChunkName: "create_new_password_page" */ "@/views/CreateNewPassword.vue"
   );
-
+const MainPage = () =>
+  import(/* webpackChunkName: "main_page" */ "@/views/MainPage.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -90,6 +91,15 @@ const routes: Array<RouteRecordRaw> = [
       } else {
         next();
       }
+    },
+  },
+  {
+    path: "/im",
+    name: "MainPage",
+    component: MainPage,
+    meta: {
+      layout: "main",
+      needsAuth: true,
     },
   },
   {

@@ -19,7 +19,9 @@
         </a-alert>
       </TransitionGroup>
     </div>
-    <component :is="layout"></component>
+    <Transition name="slide-fade" mode="out-in">
+      <component :is="layout"></component>
+    </Transition>
   </div>
 </template>
 
@@ -34,10 +36,12 @@ import {
 } from "@ant-design/icons-vue";
 import { useStore } from "@/store";
 import EmptyLayout from "@/layouts/Empty.vue";
+import MainLayout from "@/layouts/Main.vue";
 
 export default defineComponent({
   components: {
     EmptyLayout,
+    MainLayout,
     AAlert: Alert,
     SmileOutlined,
     FrownOutlined,
