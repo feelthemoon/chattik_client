@@ -19,7 +19,9 @@
         </a-alert>
       </TransitionGroup>
     </div>
-    <component :is="layout"></component>
+    <Transition name="slide-fade" mode="out-in">
+      <component :is="layout"></component>
+    </Transition>
   </div>
 </template>
 
@@ -34,9 +36,11 @@ import {
 } from "@ant-design/icons-vue";
 import { useStore } from "@/store";
 import EmptyLayout from "@/layouts/Empty.vue";
+import MainLayout from "@/layouts/Main.vue";
 
 export default defineComponent({
   components: {
+    MainLayout,
     EmptyLayout,
     AAlert: Alert,
     SmileOutlined,
@@ -46,7 +50,7 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const store = useStore();
-    const layout = computed(() => `${route.meta.layout || "empty"}-layout`);
+    const layout = computed(() => `${route.meta.layout}-layout`);
 
     const alerts = computed(() => store.getters.alerts);
     const removeAlert = (id: number) => {

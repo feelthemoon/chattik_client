@@ -56,6 +56,17 @@ module.exports = {
     };
   },
   pluginOptions: {
+    svgSprite: {
+      dir: "src/assets/static/icons",
+      test: /\.(svg)(\?.*)?$/,
+      loaderOptions: {
+        extract: false,
+        spriteFilename: "img/icons.svg",
+      },
+      pluginOptions: {
+        plainSprite: true,
+      },
+    },
     i18n: {
       locale: "n",
       fallbackLocale: "en",
@@ -65,5 +76,8 @@ module.exports = {
       compositionOnly: true,
       fullInstall: true,
     },
+  },
+  chainWebpack: (config) => {
+    config.module.rule("svg-sprite").use("svgo-loader").loader("svgo-loader");
   },
 };
