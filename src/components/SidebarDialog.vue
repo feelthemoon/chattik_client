@@ -47,7 +47,7 @@ export default defineComponent({
     ABadge: Badge,
   },
   setup() {
-    const randomGradientClass = `type-${Math.floor(Math.random() * 4 + 1)}`;
+    const randomGradientClass = `gradient-${Math.floor(Math.random() * 8 + 1)}`;
     return {
       randomGradientClass,
     };

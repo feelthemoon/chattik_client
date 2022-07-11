@@ -40,8 +40,8 @@ import MainLayout from "@/layouts/Main.vue";
 
 export default defineComponent({
   components: {
-    EmptyLayout,
     MainLayout,
+    EmptyLayout,
     AAlert: Alert,
     SmileOutlined,
     FrownOutlined,
@@ -50,7 +50,7 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const store = useStore();
-    const layout = computed(() => `${route.meta.layout || "empty"}-layout`);
+    const layout = computed(() => `${route.meta.layout}-layout`);
 
     const alerts = computed(() => store.getters.alerts);
     const removeAlert = (id: number) => {
