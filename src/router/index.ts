@@ -26,6 +26,9 @@ const CreateNewPassword = () =>
   );
 const MainPage = () =>
   import(/* webpackChunkName: "main_page" */ "@/views/MainPage.vue");
+const DialogPage = () =>
+  import(/* webpackChunkName: "dialog_page" */ "@/views/Dialog.vue");
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -97,6 +100,15 @@ const routes: Array<RouteRecordRaw> = [
     path: "/im",
     name: "MainPage",
     component: MainPage,
+    meta: {
+      layout: "main",
+      needsAuth: true,
+    },
+  },
+  {
+    path: "/im/:dialogId",
+    name: "DialogPage",
+    component: DialogPage,
     meta: {
       layout: "main",
       needsAuth: true,

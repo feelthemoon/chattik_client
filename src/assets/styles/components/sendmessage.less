@@ -1,0 +1,30 @@
+.sendmessage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #E9E9E9;
+  border-radius: 4px;
+  padding: 15px 15px 0;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #fff;
+  transition: all .3s;
+  &.focus {
+    transition: all .3s;
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, .2);
+  }
+  &__textarea {
+    border: none!important;
+    resize: none!important;
+    &:focus {
+      border: none!important;
+      box-shadow: none!important;
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+}

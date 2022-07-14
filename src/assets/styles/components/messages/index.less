@@ -1,0 +1,57 @@
+.message {
+  @self: message;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  align-self: flex-end;
+  &__top {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+  }
+  &__user-avatar {
+    margin-left: 10px;
+  }
+  &__datetime {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    time {
+      font-size: 12px;
+      color: #b0b0b0;
+      font-weight: bold;
+    }
+  }
+  &__text {
+    padding: 15px 18px;
+    border: 1px solid #ECECEC;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.0220444);
+    border-radius: 12px 12px 0 12px;
+    max-width: 300px;
+    word-break: break-word;
+  }
+  &.notMine {
+    align-self: flex-start;
+    .@{self}__top {
+      flex-direction: row;
+    }
+    .@{self}__text {
+      border: none;
+      background-color: @main-blue;
+      box-shadow: 0 5px 5px rgba(54, 116, 255, 0.196733);
+      border-radius: 12px 12px 12px 0;
+      color: #fff;
+      &::selection {
+        background-color: #fff;
+      }
+    }
+    .@{self}__user-avatar {
+      margin-right: 10px;
+    }
+    .@{self}__datetime {
+      time {
+        align-self: flex-end;
+      }
+    }
+  }
+}
