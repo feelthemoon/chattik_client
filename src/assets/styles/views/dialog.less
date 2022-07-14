@@ -1,0 +1,47 @@
+.dialog {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 35px;
+    max-height: 73px;
+    border-bottom: 1px solid #dcdbdb;
+    & > div {
+      width: 33.3333%;
+    }
+  }
+  &__actions {
+    max-height: 70px;
+    height: 100%;
+    padding-top: 4px;
+  }
+  &__user {
+    &-info {
+      text-align: center;
+    }
+    &-username {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    &-status {
+      margin-left: -3px;
+      .ant-badge-status-text {
+        color: rgba(0, 0, 0, 0.35);
+        margin-left: 4px;
+      }
+    }
+  }
+  &__options {
+    text-align: right;
+  }
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 45px;
+    height: calc(100% - 150px);
+    overflow-y: auto;
+  }
+}

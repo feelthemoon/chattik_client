@@ -1,22 +1,23 @@
 <template>
   <article class="sidebar__dialog">
-    <router-link to="to">
+    <router-link :to="`/im/${dialog?.id}`">
       <div class="sidebar__dialog-left">
         <a-badge class="sidebar__dialog-online-status" dot status="default">
           <a-avatar
+            class="sidebar__dialog-avatar"
             :size="50"
             :class="{
               [randomGradientClass]: randomGradientClass,
-              'sidebar__dialog-avatar': true,
             }"
             >A</a-avatar
           >
         </a-badge>
       </div>
       <div class="sidebar__dialog-center">
-        <h4 class="sidebar__dialog-title">GAY JULY</h4>
+        <h4 class="sidebar__dialog-title">Lorem ipsum dolor sit amet.</h4>
         <p class="sidebar__dialog-message mb-0">
-          HELLO MOTHERFUCKERRrrRrRRRRRRRRRR
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
+          numquam.
         </p>
       </div>
       <div class="sidebar__dialog-right">

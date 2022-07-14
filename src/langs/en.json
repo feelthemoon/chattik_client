@@ -34,6 +34,9 @@
       "new_password_placeholder": "New Password",
       "confirm_password_placeholder": "Confirm Your New Password",
       "button_text": "Create"
+    },
+    "dialog": {
+      "textarea_placeholder": "Typo message..."
     }
   },
   "validation": {
