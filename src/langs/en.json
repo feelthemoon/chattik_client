@@ -37,6 +37,9 @@
     },
     "dialog": {
       "textarea_placeholder": "Typo message..."
+    },
+    "main": {
+     "empty_description": "Select the dialog for start messaging"
     }
   },
   "validation": {
