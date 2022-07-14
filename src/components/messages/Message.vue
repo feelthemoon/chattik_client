@@ -9,7 +9,7 @@
         }"
         >A</a-avatar
       >
-      <component :is="messageType"></component>
+      <component :is="messageType" :message="message"></component>
     </div>
     <div class="message__datetime">
       <time>Вчера, 15:50</time>
@@ -21,13 +21,15 @@
 import { defineComponent } from "vue";
 import { Avatar } from "ant-design-vue";
 import { useRoute } from "vue-router";
-import TextMessage from "@/components/messages/Text.vue";
+import TextMessage from "@/components/messages/TextMessage.vue";
+import AudioMessage from "@/components/messages/AudioMessage.vue";
 
 export default defineComponent({
   name: "Message",
   components: {
     AAvatar: Avatar,
     TextMessage,
+    AudioMessage,
   },
   props: {
     message: {

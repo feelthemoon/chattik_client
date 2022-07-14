@@ -1,9 +1,14 @@
 .message {
   @self: message;
+  @audio: audio-message;
+
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   align-self: flex-end;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &__top {
     display: flex;
     align-items: flex-end;
@@ -22,7 +27,7 @@
       font-weight: bold;
     }
   }
-  &__text {
+  &__text, .@{audio} {
     padding: 15px 18px;
     border: 1px solid #ECECEC;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.0220444);
@@ -35,7 +40,19 @@
     .@{self}__top {
       flex-direction: row;
     }
-    .@{self}__text {
+    .@{audio}__shape {
+      svg {
+        fill: #fff;
+      }
+    }
+    .@{audio}__duration {
+      color: #fff;
+      opacity: 0.5;
+    }
+    .@{audio}__cover {
+      background-color: @secondary-blue;
+    }
+    .@{self}__text, .@{audio} {
       border: none;
       background-color: @main-blue;
       box-shadow: 0 5px 5px rgba(54, 116, 255, 0.196733);
@@ -55,3 +72,5 @@
     }
   }
 }
+
+@import "audio";

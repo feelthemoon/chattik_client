@@ -25,6 +25,9 @@
         v-for="i in 20"
         :key="i"
       ></message>
+      <message
+        :message="{ type: 'audio', attachments: [{ src: '' }], notMine: false }"
+      ></message>
     </section>
     <section class="dialog__actions">
       <send-message></send-message>
