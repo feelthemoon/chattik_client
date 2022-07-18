@@ -65,5 +65,11 @@
         "search_placeholder": "Search..."
       }
     }
+  },
+  "components": {
+    "file_message": {
+      "file_size": "File Size",
+      "download_text": "Download"
+    }
   }
 }

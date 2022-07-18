@@ -3,7 +3,9 @@
     <div class="file-message__top">
       <div class="file-message__info">
         <span class="file-message__filename">SideBar.jsx</span>
-        <span class="file-message__filesize">Размер: 13kb.</span>
+        <span class="file-message__filesize"
+          >{{ $t("components.file_message.file_size") }}: 13kb.</span
+        >
       </div>
       <div class="file-message__icon">
         <component :is="fileIcon" :style="{ fontSize: '2.5em' }"></component>
@@ -13,7 +15,7 @@
       <template #icon>
         <download-outlined></download-outlined>
       </template>
-      Скачать
+      {{ $t("components.file_message.download_text") }}
     </a-button>
   </div>
 </template>
