@@ -1,6 +1,7 @@
 .message {
   @self: message;
   @audio: audio-message;
+  @file: file-message;
 
   display: flex;
   flex-direction: column;
@@ -23,7 +24,17 @@
     color: #fff;
     opacity: 0.5;
   }
-
+  .@{file}__download {
+    border-bottom-right-radius: 12px;
+    background-color: @main-blue;
+    color: #fff;
+    &:hover {
+      background-color: @main-blue;
+      color: #fff;
+      opacity: 0.8;
+      transition: .3s;
+    }
+  }
   .@{audio}__cover {
     background-color: @secondary-blue;
   }
@@ -62,7 +73,21 @@
       align-items: flex-end;
       flex-direction: row-reverse;
     }
-
+    .@{file} {
+      margin: 0 10px;
+    }
+    .@{file}__download {
+      border-radius: 0 0 0 12px;
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #d0d0d0;
+      border-top: none;
+      &:hover {
+        background-color: rgba(189, 189, 189, 0.53);
+        color: #000;
+        transition: .3s;
+      }
+    }
     .@{self}__datetime {
       margin-left: 30px;
       time {
@@ -96,3 +121,4 @@
 }
 
 @import "audio";
+@import "file";

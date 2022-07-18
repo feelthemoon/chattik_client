@@ -1,5 +1,5 @@
 <template>
-  <p class="message__text mb-0">
+  <p class="message__text mb-0 message__content">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, aut
     commodi, debitis deleniti eos incidunt ipsa ipsum laboriosam minus mollitia
     nostrum, nulla officiis optio perferendis totam ullam vel. Aliquid, itaque?

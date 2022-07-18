@@ -1,5 +1,5 @@
 <template>
-  <div class="audio-message">
+  <div class="audio-message message__content">
     <audio :src="audioAttachment?.src"></audio>
     <div class="audio-message__track">
       <div class="audio-message__cover"></div>

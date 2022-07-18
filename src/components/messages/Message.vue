@@ -9,11 +9,7 @@
         }"
         >A</a-avatar
       >
-      <component
-        class="message__content"
-        :is="messageType"
-        :message="message"
-      ></component>
+      <component :is="messageType" :message="message"></component>
       <icon
         name="message-read"
         width="14px"
@@ -33,6 +29,7 @@ import { Avatar } from "ant-design-vue";
 import { useRoute } from "vue-router";
 import TextMessage from "@/components/messages/TextMessage.vue";
 import AudioMessage from "@/components/messages/AudioMessage.vue";
+import FileMessage from "@/components/messages/FileMessage.vue";
 import Icon from "@/components/Icon.vue";
 
 export default defineComponent({
@@ -41,6 +38,7 @@ export default defineComponent({
     AAvatar: Avatar,
     TextMessage,
     AudioMessage,
+    FileMessage,
     Icon,
   },
   props: {

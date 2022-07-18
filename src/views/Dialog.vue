@@ -24,6 +24,20 @@
       <message
         :message="{ type: 'audio', attachments: [{ src: '' }], isMine: false }"
       ></message>
+      <message
+        :message="{
+          type: 'file',
+          attachments: [{ src: '', type: 'pdf' }],
+          isMine: true,
+        }"
+      ></message>
+      <message
+        :message="{
+          type: 'file',
+          attachments: [{ src: '', type: 'pdf' }],
+          isMine: false,
+        }"
+      ></message>
     </section>
     <section class="dialog__actions">
       <send-message></send-message>
