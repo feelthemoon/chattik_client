@@ -19,6 +19,7 @@ module.exports = {
       less: {
         globalVars: {
           "main-blue": "#1890ff",
+          "secondary-blue": "rgba(25, 101, 209, 0.59)",
           red: "#fd5a5a",
           green: "#52c41a",
         },

@@ -1,57 +1,160 @@
 .message {
   @self: message;
+  @audio: audio-message;
+  @file: file-message;
+  @text: text-message;
+
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  align-self: flex-end;
+  align-self: flex-start;
+  &:last-child {
+    margin-bottom: 0;
+  }
   &__top {
     display: flex;
+    flex-direction: row;
+  }
+  .@{text} {
+    display: flex;
     align-items: flex-end;
-    flex-direction: row-reverse;
+  }
+  &__attachments {
+    display: flex;
+    align-items: center;
+    .attachment {
+      width: 50px;
+      height: 50px;
+      margin-left: 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #c6e3ff;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+      }
+      &--other {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, .3);
+        font-weight: 500;
+      }
+    }
+  }
+  .@{audio}__shape {
+    svg {
+      fill: #fff;
+    }
+  }
+  .@{audio}__duration {
+    color: #fff;
+    opacity: 0.5;
+  }
+  .@{file}__download {
+    border-bottom-right-radius: 12px;
+    background-color: @main-blue;
+    color: #fff;
+    &:hover {
+      background-color: @main-blue;
+      color: #fff;
+      opacity: 0.8;
+      transition: .3s;
+    }
+  }
+  .@{audio}__cover {
+    background-color: @secondary-blue;
+  }
+  &__content {
+    border: none;
+    padding: 15px 18px;
+    background-color: @main-blue;
+    box-shadow: 0 5px 5px rgba(54, 116, 255, 0.196733);
+    border-radius: 12px 12px 12px 0;
+    color: #fff;
+    word-break: break-word;
+    max-width: 300px;
+    &::selection {
+      background-color: #fff;
+    }
   }
   &__user-avatar {
-    margin-left: 10px;
+    margin-right: 10px;
+    align-self: flex-end;
   }
   &__datetime {
     margin-top: 8px;
     display: flex;
     flex-direction: column;
+    margin-left: 45px;
     time {
       font-size: 12px;
       color: #b0b0b0;
       font-weight: bold;
+      align-self: flex-start;
     }
   }
-  &__text {
-    padding: 15px 18px;
-    border: 1px solid #ECECEC;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.0220444);
-    border-radius: 12px 12px 0 12px;
-    max-width: 300px;
-    word-break: break-word;
-  }
-  &.notMine {
-    align-self: flex-start;
+  &.isMine {
+    align-self: flex-end;
+
     .@{self}__top {
-      flex-direction: row;
+      align-items: flex-end;
+      flex-direction: row-reverse;
     }
-    .@{self}__text {
-      border: none;
-      background-color: @main-blue;
-      box-shadow: 0 5px 5px rgba(54, 116, 255, 0.196733);
-      border-radius: 12px 12px 12px 0;
-      color: #fff;
-      &::selection {
-        background-color: #fff;
+    .@{text} {
+      flex-direction: row-reverse;
+    }
+    .@{file} {
+      margin: 0 10px;
+    }
+    .@{file}__download {
+      border-radius: 0 0 0 12px;
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #d0d0d0;
+      border-top: none;
+      &:hover {
+        background-color: rgba(189, 189, 189, 0.53);
+        color: #000;
+        transition: .3s;
       }
     }
-    .@{self}__user-avatar {
-      margin-right: 10px;
-    }
     .@{self}__datetime {
+      margin-right: 55px;
+      margin-left: 0;
       time {
         align-self: flex-end;
       }
     }
+
+    .@{self}__content {
+      border: 1px solid #ECECEC;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.0220444);
+      border-radius: 12px 12px 0 12px;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-color: #fff;
+      color: #000;
+    }
+    .@{audio}__shape {
+      svg {
+        fill: #7e7e7e;
+      }
+    }
+    .@{audio}__duration {
+      color: #7e7e7e;
+      opacity: 1;
+    }
+    .@{audio}__cover {
+      background-color: rgb(224, 224, 224);
+    }
   }
+
 }
+
+@import "audio";
+@import "file";

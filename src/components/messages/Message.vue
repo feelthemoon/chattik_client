@@ -1,5 +1,5 @@
 <template>
-  <div class="message" :class="{ notMine: message.notMine }">
+  <div class="message" :class="{ isMine: message.isMine }">
     <div class="message__top">
       <a-avatar
         :size="35"
@@ -9,7 +9,13 @@
         }"
         >A</a-avatar
       >
-      <component :is="messageType"></component>
+      <component :is="messageType" :message="message"></component>
+      <icon
+        name="message-read"
+        width="14px"
+        height="14px"
+        v-if="message.isMine"
+      ></icon>
     </div>
     <div class="message__datetime">
       <time>Вчера, 15:50</time>
@@ -21,13 +27,19 @@
 import { defineComponent } from "vue";
 import { Avatar } from "ant-design-vue";
 import { useRoute } from "vue-router";
-import TextMessage from "@/components/messages/Text.vue";
+import TextMessage from "@/components/messages/TextMessage.vue";
+import AudioMessage from "@/components/messages/AudioMessage.vue";
+import FileMessage from "@/components/messages/FileMessage.vue";
+import Icon from "@/components/Icon.vue";
 
 export default defineComponent({
   name: "Message",
   components: {
     AAvatar: Avatar,
     TextMessage,
+    AudioMessage,
+    FileMessage,
+    Icon,
   },
   props: {
     message: {
