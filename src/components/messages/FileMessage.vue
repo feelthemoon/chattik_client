@@ -11,12 +11,14 @@
         <component :is="fileIcon" :style="{ fontSize: '2.5em' }"></component>
       </div>
     </div>
-    <a-button type="text" class="file-message__download">
-      <template #icon>
-        <download-outlined></download-outlined>
-      </template>
+    <a
+      target="_blank"
+      :href="message.attachments[0].src"
+      class="file-message__download"
+    >
+      <download-outlined></download-outlined>
       {{ $t("components.file_message.download_text") }}
-    </a-button>
+    </a>
   </div>
 </template>
 

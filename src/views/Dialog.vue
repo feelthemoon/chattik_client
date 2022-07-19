@@ -19,7 +19,39 @@
       </div>
     </header>
     <section class="dialog__messages" ref="dialogMessages">
-      <message :message="{ type: 'text', isMine: true }"></message>
+      <message
+        :message="{
+          type: 'text',
+          attachments: [
+            {
+              type: 'word',
+              src: 'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+              title: 'Some',
+            },
+            {
+              type: 'image',
+              src: 'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+              title: 'Some',
+            },
+            {
+              type: 'image',
+              src: 'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+              title: 'Some',
+            },
+            {
+              type: 'image',
+              src: 'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+              title: 'Some',
+            },
+            {
+              type: 'image',
+              src: 'https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg',
+              title: 'Some',
+            },
+          ],
+          isMine: false,
+        }"
+      ></message>
       <message :message="{ type: 'text' }" v-for="i in 20" :key="i"></message>
       <message
         :message="{ type: 'audio', attachments: [{ src: '' }], isMine: false }"
