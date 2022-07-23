@@ -47,6 +47,33 @@ const UsersActions: ActionTree<IUsersState, IRootState> = {
       );
     }
   },
+
+  async searchUsers({ dispatch, commit, rootGetters }, username: string) {
+    try {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.USER.NAMESPACE_SEARCH, loading: true },
+        { root: true }
+      );
+      const searchedUsers = await API_USERS.searchUsers(
+        username,
+        rootGetters.token
+      );
+      commit("UPDATE_SEARCHED_USERS", searchedUsers.data);
+    } catch (e) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD },
+        { root: true }
+      );
+    } finally {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD, loading: false },
+        { root: true }
+      );
+    }
+  },
 };
 
 export default UsersActions;

@@ -14,6 +14,19 @@ class _UsersApi extends _BaseApi {
       token: recoverToken,
     });
   }
+
+  searchUsers(username: string, accessToken: string): Promise<AxiosResponse> {
+    return this.executeRequest(
+      "users/search",
+      "GET",
+      true,
+      null,
+      {
+        s: username,
+      },
+      { Authorization: accessToken }
+    );
+  }
 }
 
 export default new _UsersApi();

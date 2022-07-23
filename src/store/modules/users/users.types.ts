@@ -5,12 +5,15 @@ export interface IUserInfo {
   name: string;
   avatar: string;
   confirmed: boolean;
+  dialogs?: [];
+  messages?: [];
   lastSeen: Date;
   createdAt: Date;
 }
 
 export interface IUsersState {
   userInfo: IUserInfo | unknown;
+  searchedUsers: Array<IUserInfo>;
 }
 
 export interface INewPasswordData {
