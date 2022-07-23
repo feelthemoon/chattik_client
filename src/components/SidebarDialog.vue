@@ -1,17 +1,8 @@
 <template>
   <article class="sidebar__dialog">
-    <router-link :to="`/im/${dialog?.id}`">
+    <router-link :to="`/im/@${dialog?.user.username}`">
       <div class="sidebar__dialog-left">
-        <a-badge class="sidebar__dialog-online-status" dot status="default">
-          <a-avatar
-            class="sidebar__dialog-avatar"
-            :size="50"
-            :class="{
-              [randomGradientClass]: randomGradientClass,
-            }"
-            >A</a-avatar
-          >
-        </a-badge>
+        <user-avatar :user="{ username: 'aaaa' }"></user-avatar>
       </div>
       <div class="sidebar__dialog-center">
         <h4 class="sidebar__dialog-title">Lorem ipsum dolor sit amet.</h4>
@@ -31,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import { Avatar, Badge } from "ant-design-vue";
 import { defineComponent } from "vue";
 import Icon from "@/components/Icon.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 
 export default defineComponent({
   name: "SidebarDialog",
@@ -43,15 +34,8 @@ export default defineComponent({
     },
   },
   components: {
+    UserAvatar,
     Icon,
-    AAvatar: Avatar,
-    ABadge: Badge,
-  },
-  setup() {
-    const randomGradientClass = `gradient-${Math.floor(Math.random() * 8 + 1)}`;
-    return {
-      randomGradientClass,
-    };
   },
 });
 </script>

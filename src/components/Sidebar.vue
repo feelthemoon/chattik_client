@@ -40,14 +40,7 @@
         </a-dropdown>
       </div>
       <div class="sidebar__search ml-5">
-        <a-input
-          type="search"
-          :placeholder="$t('layouts.main.sidebar.search_placeholder')"
-        >
-          <template #prefix>
-            <search-outlined></search-outlined>
-          </template>
-        </a-input>
+        <search-users></search-users>
       </div>
     </header>
     <section class="sidebar__dialogs">
@@ -57,17 +50,9 @@
 </template>
 
 <script lang="ts">
-import {
-  Input,
-  Button,
-  Dropdown,
-  Menu,
-  MenuItem,
-  Switch,
-} from "ant-design-vue";
+import { Button, Dropdown, Menu, MenuItem, Switch } from "ant-design-vue";
 import {
   MenuOutlined,
-  SearchOutlined,
   SettingOutlined,
   SaveOutlined,
   TeamOutlined,
@@ -77,19 +62,19 @@ import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import Icon from "@/components/Icon.vue";
 import SidebarDialog from "@/components/SidebarDialog.vue";
+import SearchUsers from "@/components/SearchUsers.vue";
 
 export default defineComponent({
   name: "Sidebar",
   components: {
+    SearchUsers,
     SidebarDialog,
-    AInput: Input,
     AButton: Button,
     ADropdown: Dropdown,
     AMenu: Menu,
     AMenuItem: MenuItem,
     ASwitch: Switch,
     MenuOutlined,
-    SearchOutlined,
     SettingOutlined,
     SaveOutlined,
     TeamOutlined,

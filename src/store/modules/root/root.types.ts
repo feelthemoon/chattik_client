@@ -8,6 +8,7 @@ export abstract class Namespaces {
   };
   static readonly USER = {
     NAMESPACE_NEW_PASSWORD: "new_password_namespace",
+    NAMESPACE_SEARCH: "search_namespace",
   };
 }
 export enum AlertIcons {

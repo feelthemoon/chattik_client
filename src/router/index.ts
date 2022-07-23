@@ -106,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/im/:dialogId",
+    path: "/im/@:username",
     name: "DialogPage",
     component: DialogPage,
     meta: {

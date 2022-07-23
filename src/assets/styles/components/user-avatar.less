@@ -1,0 +1,18 @@
+.user-avatar {
+  position: relative;
+  &__status {
+    position: absolute;
+    top: 40px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    &--offline {
+      background-color: #d9d9d9;
+    }
+    &--online {
+      background-color: #6ced2d;
+    }
+  }
+}
