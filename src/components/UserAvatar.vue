@@ -3,7 +3,7 @@
     <a-avatar
       :size="size"
       :class="{
-        [randomGradientClass]: randomGradientClass,
+        [user.avatar]: user.avatar,
       }"
       >{{ user.username[0].toUpperCase() }}</a-avatar
     >
@@ -37,12 +37,6 @@ export default defineComponent({
       type: Boolean as PropType<boolean>,
       default: () => true,
     },
-  },
-  setup() {
-    const randomGradientClass = `gradient-${Math.floor(Math.random() * 8 + 1)}`;
-    return {
-      randomGradientClass,
-    };
   },
 });
 </script>
