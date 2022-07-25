@@ -63,13 +63,37 @@ const UsersActions: ActionTree<IUsersState, IRootState> = {
     } catch (e) {
       dispatch(
         "updateErrors",
-        { error: e, namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD },
+        { error: e, namespace: Namespaces.USER.NAMESPACE_SEARCH },
         { root: true }
       );
     } finally {
       dispatch(
         "updateLoading",
-        { namespace: Namespaces.USER.NAMESPACE_NEW_PASSWORD, loading: false },
+        { namespace: Namespaces.USER.NAMESPACE_SEARCH, loading: false },
+        { root: true }
+      );
+    }
+  },
+
+  async getMe({ dispatch, commit, rootGetters }) {
+    try {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.USER.NAMESPACE_ME, loading: true },
+        { root: true }
+      );
+      const userInfo = await API_USERS.getMe(rootGetters.token);
+      commit("UPDATE_USER_INFO", userInfo.data);
+    } catch (e) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.USER.NAMESPACE_ME },
+        { root: true }
+      );
+    } finally {
+      dispatch(
+        "updateLoading",
+        { namespace: Namespaces.USER.NAMESPACE_ME, loading: false },
         { root: true }
       );
     }

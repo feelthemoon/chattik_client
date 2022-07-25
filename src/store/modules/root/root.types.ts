@@ -4,11 +4,13 @@ export abstract class Namespaces {
     NAMESPACE_SIGNUP: "signup_namespace",
     NAMESPACE_LOGOUT: "logout_namespace",
     NAMESPACE_RECOVER: "recover_namespace",
-    NAMESPACE_RECOVER_TOKEN_VERIFY: "recover_token_verify",
+    NAMESPACE_RECOVER_TOKEN_VERIFY: "recover_token_verify_namespace",
+    NAMESPACE_REFRESH_ACCESS_TOKEN: "refresh_access_token_namespace",
   };
   static readonly USER = {
     NAMESPACE_NEW_PASSWORD: "new_password_namespace",
     NAMESPACE_SEARCH: "search_namespace",
+    NAMESPACE_ME: "my_info_namespace",
   };
 }
 export enum AlertIcons {

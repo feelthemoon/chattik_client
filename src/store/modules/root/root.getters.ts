@@ -14,6 +14,7 @@ const RootGetters: GetterTree<IRootState, IRootState> = {
           : e.namespace === namespace
       ),
   alerts: (state: IRootState) => state.alerts,
+  errors: (state: IRootState) => state.errors,
 };
 
 export default RootGetters;

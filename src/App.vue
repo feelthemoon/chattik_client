@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, watch } from "vue";
 import { useRoute } from "vue-router";
 import { Alert } from "ant-design-vue";
 import {
@@ -35,6 +35,7 @@ import {
   RobotOutlined,
 } from "@ant-design/icons-vue";
 import { useStore } from "@/store";
+import { Namespaces } from "@/store/modules/root/root.types";
 import EmptyLayout from "@/layouts/Empty.vue";
 import MainLayout from "@/layouts/Main.vue";
 
@@ -50,8 +51,24 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const store = useStore();
+
     const layout = computed(() => `${route.meta.layout}-layout`);
 
+    watch(layout, (newLayout) => {
+      if (newLayout !== "empty-layout") {
+        store
+          .dispatch("auth/refreshAccessToken")
+          .then(async () => {
+            await store.dispatch("users/getMe");
+          })
+          .catch((error) => {
+            store.dispatch("updateErrors", {
+              error,
+              namespace: Namespaces.AUTH.NAMESPACE_REFRESH_ACCESS_TOKEN,
+            });
+          });
+      }
+    });
     const alerts = computed(() => store.getters.alerts);
     const removeAlert = (id: number) => {
       store.commit("REMOVE_ALERT", id);

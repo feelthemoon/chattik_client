@@ -126,6 +126,13 @@ const AuthActions: ActionTree<unknown, IRootState> = {
       );
     }
   },
+
+  async refreshAccessToken({ commit }) {
+    const response = await API_AUTH.refreshAccessToken();
+    commit("SET_TOKEN", `${response.data.type} ${response.data.token}`, {
+      root: true,
+    });
+  },
 };
 
 export default AuthActions;
