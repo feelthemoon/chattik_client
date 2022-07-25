@@ -8,12 +8,13 @@ import {
   Namespaces,
 } from "@/store/modules/root/root.types";
 import { AxiosError } from "axios";
+import router from "@/router";
 
 const RootActions: ActionTree<IRootState, IRootState> = {
-  updateErrors(
+  async updateErrors(
     { commit, dispatch },
     { error, namespace }: { error: unknown; namespace: Namespaces }
-  ): void {
+  ): Promise<void> {
     if (
       error instanceof AxiosError &&
       Array.isArray(error.response?.data.message)
@@ -45,6 +46,9 @@ const RootActions: ActionTree<IRootState, IRootState> = {
                 : AlertIcons.ERROR_ICON_CAPTCHA,
           });
         });
+      }
+      if (error.response?.status === 401) {
+        await router.push({ name: "SigninPage" });
       }
     } else {
       dispatch("updateAlerts", {

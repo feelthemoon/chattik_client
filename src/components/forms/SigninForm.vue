@@ -84,6 +84,7 @@ import { useStore } from "@/store";
 import { IAPIError, IError, Namespaces } from "@/store/modules/root/root.types";
 import { useReCaptcha } from "vue-recaptcha-v3";
 import useVuelidate from "@vuelidate/core";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "SigninForm",
@@ -102,6 +103,7 @@ export default defineComponent({
       password: "",
     });
     const store = useStore();
+    const router = useRouter();
 
     const rules = {
       user: {
@@ -122,6 +124,7 @@ export default defineComponent({
           ...user.value,
           recaptchaToken,
         });
+        await router.push({ name: "MainPage" });
       }
     };
 

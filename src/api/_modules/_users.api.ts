@@ -27,6 +27,12 @@ class _UsersApi extends _BaseApi {
       { Authorization: accessToken }
     );
   }
+
+  getMe(accessToken: string): Promise<AxiosResponse> {
+    return this.executeRequest("users/me", "GET", true, null, null, {
+      Authorization: accessToken,
+    });
+  }
 }
 
 export default new _UsersApi();
