@@ -8,7 +8,7 @@ export class _BaseApi {
   constructor() {
     this._baseUrl = process.env.VUE_APP_API_URL;
   }
-  protected executeRequest(
+  protected async executeRequest(
     route: string,
     method: Method,
     hasPrefix?: boolean,
@@ -22,7 +22,7 @@ export class _BaseApi {
 
     store.commit("CLEAR_ERRORS");
 
-    return axios.request({
+    const response = await axios.request({
       url,
       method,
       headers,
@@ -30,5 +30,9 @@ export class _BaseApi {
       params,
       withCredentials: true,
     });
+    if (response.headers.authorization) {
+      store.commit("SET_TOKEN", response.headers.authorization);
+    }
+    return response;
   }
 }

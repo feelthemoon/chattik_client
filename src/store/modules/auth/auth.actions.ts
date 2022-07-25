@@ -12,15 +12,14 @@ import {
 import { API_AUTH } from "@/api";
 
 const AuthActions: ActionTree<unknown, IRootState> = {
-  async signin({ dispatch, commit }, data: ISigninData) {
+  async signin({ dispatch }, data: ISigninData) {
     try {
       dispatch(
         "updateLoading",
         { namespace: Namespaces.AUTH.NAMESPACE_SIGNIN, loading: true },
         { root: true }
       );
-      const res = await API_AUTH.signin(data);
-      commit("SET_TOKEN", res.headers.authorization, { root: true });
+      await API_AUTH.signin(data);
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
@@ -36,15 +35,14 @@ const AuthActions: ActionTree<unknown, IRootState> = {
     }
   },
 
-  async signup({ dispatch, commit }, data: ISignupData) {
+  async signup({ dispatch }, data: ISignupData) {
     try {
       dispatch(
         "updateLoading",
         { namespace: Namespaces.AUTH.NAMESPACE_SIGNUP, loading: true },
         { root: true }
       );
-      const res = await API_AUTH.signup(data);
-      commit("SET_TOKEN", res.headers.authorization, { root: true });
+      await API_AUTH.signup(data);
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
