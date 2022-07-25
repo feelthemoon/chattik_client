@@ -8,34 +8,40 @@ import {
 
 class _AuthApi extends _BaseApi {
   constructor() {
-    super();
+    super("auth");
   }
 
   public signin(data: ISigninData): Promise<AxiosResponse> {
-    return this.executeRequest("auth/signin", "POST", true, data);
+    return this.executeRequest("signin", "POST", data);
   }
 
   public signup(data: ISignupData): Promise<AxiosResponse> {
-    return this.executeRequest("auth/signup", "POST", true, data);
+    return this.executeRequest("signup", "POST", data);
   }
 
   public refreshAccessToken(): Promise<AxiosResponse> {
-    return this.executeRequest("auth/refresh", "POST", true);
+    return this.executeRequest("refresh", "POST");
   }
 
   public logout(accessToken: string): Promise<AxiosResponse> {
-    return this.executeRequest("auth/logout", "POST", true, null, null, {
+    return this.executeRequest("logout", "POST", null, null, {
       authorization: accessToken,
     });
   }
 
   public recoverPassword(data: IRecoverData): Promise<AxiosResponse> {
-    return this.executeRequest("auth/recover", "POST", true, data);
+    return this.executeRequest("recover", "POST", data);
   }
 
   public verifyRecoverToken(recoverToken: string): Promise<AxiosResponse> {
-    return this.executeRequest("auth/verify-recover", "GET", true, null, {
+    return this.executeRequest("verify-recover", "GET", null, {
       token: recoverToken,
+    });
+  }
+
+  public verifyUser(verifyToken: string): Promise<AxiosResponse> {
+    return this.executeRequest("verify", "POST", null, {
+      token: verifyToken,
     });
   }
 }

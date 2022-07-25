@@ -4,22 +4,21 @@ import { INewPasswordData } from "@/store/modules/users/users.types";
 
 class _UsersApi extends _BaseApi {
   constructor() {
-    super();
+    super("users");
   }
   createNewPassword(
     data: INewPasswordData,
     recoverToken: string
   ): Promise<AxiosResponse> {
-    return this.executeRequest("users/new-password", "PUT", true, data, {
+    return this.executeRequest("new-password", "PUT", data, {
       token: recoverToken,
     });
   }
 
   searchUsers(username: string, accessToken: string): Promise<AxiosResponse> {
     return this.executeRequest(
-      "users/search",
+      "search",
       "GET",
-      true,
       null,
       {
         s: username,
@@ -29,7 +28,7 @@ class _UsersApi extends _BaseApi {
   }
 
   getMe(accessToken: string): Promise<AxiosResponse> {
-    return this.executeRequest("users/me", "GET", true, null, null, {
+    return this.executeRequest("me", "GET", null, null, {
       Authorization: accessToken,
     });
   }
