@@ -3,22 +3,20 @@ import store from "@/store";
 
 export class _BaseApi {
   private readonly _baseUrl: string;
-  private _prefix = "api/";
+  private readonly _prefix = "api/";
 
-  constructor() {
+  constructor(customPrefix: string) {
     this._baseUrl = process.env.VUE_APP_API_URL;
+    this._prefix += customPrefix + "/";
   }
   protected async executeRequest(
     route: string,
     method: Method,
-    hasPrefix?: boolean,
     data?: unknown,
     params?: unknown,
     headers?: AxiosRequestHeaders
   ): Promise<AxiosResponse> {
-    const url = hasPrefix
-      ? this._baseUrl + this._prefix + route
-      : this._baseUrl + route;
+    const url = this._baseUrl + this._prefix + route;
 
     store.commit("CLEAR_ERRORS");
 

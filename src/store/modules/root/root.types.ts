@@ -6,6 +6,7 @@ export abstract class Namespaces {
     NAMESPACE_RECOVER: "recover_namespace",
     NAMESPACE_RECOVER_TOKEN_VERIFY: "recover_token_verify_namespace",
     NAMESPACE_REFRESH_ACCESS_TOKEN: "refresh_access_token_namespace",
+    NAMESPACE_VERIFY_USER: "verify_user_namespace",
   };
   static readonly USER = {
     NAMESPACE_NEW_PASSWORD: "new_password_namespace",

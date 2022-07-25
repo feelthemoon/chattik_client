@@ -133,6 +133,29 @@ const AuthActions: ActionTree<unknown, IRootState> = {
       root: true,
     });
   },
+
+  async verifyUser({ dispatch }, verifyToken: string) {
+    try {
+      await API_AUTH.verifyUser(verifyToken);
+      dispatch(
+        "updateAlerts",
+        {
+          type: "success",
+          message: "Success",
+          description: "Your account successfully confirmed!",
+          showIcon: true,
+          iconName: AlertIcons.SUCCESS_ICON,
+        },
+        { root: true }
+      );
+    } catch (e) {
+      dispatch(
+        "updateErrors",
+        { error: e, namespace: Namespaces.AUTH.NAMESPACE_VERIFY_USER },
+        { root: true }
+      );
+    }
+  },
 };
 
 export default AuthActions;
