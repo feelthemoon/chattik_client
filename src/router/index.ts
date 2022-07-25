@@ -102,7 +102,6 @@ const routes: Array<RouteRecordRaw> = [
     component: MainPage,
     meta: {
       layout: "main",
-      needsAuth: true,
     },
   },
   {
@@ -111,7 +110,6 @@ const routes: Array<RouteRecordRaw> = [
     component: DialogPage,
     meta: {
       layout: "main",
-      needsAuth: true,
     },
   },
   {
