@@ -28,6 +28,10 @@ const MainPage = () =>
   import(/* webpackChunkName: "main_page" */ "@/views/MainPage.vue");
 const DialogPage = () =>
   import(/* webpackChunkName: "dialog_page" */ "@/views/Dialog.vue");
+const ConfirmUser = () =>
+  import(
+    /* webpackChunkName: "confirm_user_page" */ "@/views/auth/ConfirmUser.vue"
+  );
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -70,6 +74,21 @@ const routes: Array<RouteRecordRaw> = [
         next();
       } else {
         next({ name: "SignupPage" });
+      }
+    },
+  },
+  {
+    path: "/confirm",
+    name: "ConfirmUser",
+    component: ConfirmUser,
+    meta: {
+      layout: "empty",
+    },
+    beforeEnter(to, _, next: NavigationGuardNext) {
+      if (to.query.token) {
+        next();
+      } else {
+        next({ name: "MainPage" });
       }
     },
   },

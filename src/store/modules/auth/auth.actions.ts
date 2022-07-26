@@ -157,6 +157,8 @@ const AuthActions: ActionTree<unknown, IRootState> = {
         { error: e, namespace: Namespaces.AUTH.NAMESPACE_VERIFY_USER },
         { root: true }
       );
+    } finally {
+      await router.push({ name: "MainPage" });
     }
   },
 };
