@@ -102,6 +102,7 @@ const routes: Array<RouteRecordRaw> = [
     component: MainPage,
     meta: {
       layout: "main",
+      needsAuth: true,
     },
   },
   {
@@ -110,6 +111,7 @@ const routes: Array<RouteRecordRaw> = [
     component: DialogPage,
     meta: {
       layout: "main",
+      needsAuth: true,
     },
   },
   {
@@ -134,7 +136,11 @@ router.beforeEach(
     next: NavigationGuardNext
   ) => {
     await store.commit("CLEAR_ERRORS");
-    next();
+    if (!to.meta.needsAuth && localStorage.getItem("login")) {
+      next({ name: "MainPage" });
+    } else {
+      next();
+    }
   }
 );
 export default router;

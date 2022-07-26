@@ -48,6 +48,7 @@ const RootActions: ActionTree<IRootState, IRootState> = {
         });
       }
       if (error.response?.status === 401) {
+        localStorage.clear();
         await router.push({ name: "SigninPage" });
       }
     } else {

@@ -8,6 +8,7 @@ import { MutationTree } from "vuex";
 
 const RootMutations: MutationTree<IRootState> = {
   SET_TOKEN(state: IRootState, token: string) {
+    localStorage.setItem("login", "true");
     state.token = token;
   },
   UPDATE_LOADING(state: IRootState, loading: ILoading) {
