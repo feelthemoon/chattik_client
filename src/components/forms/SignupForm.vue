@@ -133,7 +133,9 @@ export default defineComponent({
     });
 
     const store = useStore();
-    const token: ComputedRef<string> = computed(() => store.getters.token);
+    const apiErrors: ComputedRef<IError> = computed(() =>
+      store.getters.errorByNamespace(Namespaces.AUTH.NAMESPACE_SIGNUP, 400)
+    );
 
     const validationPassword = helpers.regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,255})/
@@ -160,15 +162,11 @@ export default defineComponent({
         await reCaptcha?.recaptchaLoaded();
         const recaptchaToken = await reCaptcha?.executeRecaptcha("signup");
         await store.dispatch("auth/signup", { ...user.value, recaptchaToken });
-        if (token.value) {
+        if (!apiErrors.value) {
           emit("showVerify");
         }
       }
     };
-
-    const apiErrors: ComputedRef<IError> = computed(() =>
-      store.getters.errorByNamespace(Namespaces.AUTH.NAMESPACE_SIGNUP, 400)
-    );
 
     const invalidEmailError: ComputedRef<IAPIError | undefined> = computed(() =>
       apiErrors.value?.message.find(
