@@ -99,11 +99,11 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: "empty",
     },
-    async beforeEnter(from, _, next: NavigationGuardNext) {
-      if (!from.query.token) {
+    async beforeEnter(to, _, next: NavigationGuardNext) {
+      if (!to.query.token) {
         next({ name: "NotFound" });
       } else {
-        await store.dispatch("auth/verifyRecoverToken", from.query.token);
+        await store.dispatch("auth/verifyRecoverToken", to.query.token);
         if (
           store.getters.errorByNamespace(
             Namespaces.AUTH.NAMESPACE_RECOVER_TOKEN_VERIFY
