@@ -9,6 +9,7 @@ import {
   IUsersState,
 } from "@/store/modules/users/users.types";
 import { API_USERS } from "@/api";
+import router from "@/router";
 
 const UsersActions: ActionTree<IUsersState, IRootState> = {
   async createNewPassword(
@@ -33,6 +34,7 @@ const UsersActions: ActionTree<IUsersState, IRootState> = {
         },
         { root: true }
       );
+      await router.push({ name: "SigninPage" });
     } catch (e) {
       dispatch(
         "updateErrors",
