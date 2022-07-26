@@ -102,16 +102,17 @@ const routes: Array<RouteRecordRaw> = [
     async beforeEnter(from, _, next: NavigationGuardNext) {
       if (!from.query.token) {
         next({ name: "NotFound" });
-      }
-      await store.dispatch("auth/verifyRecoverToken", from.query.token);
-      if (
-        store.getters.errorByNamespace(
-          Namespaces.AUTH.NAMESPACE_RECOVER_TOKEN_VERIFY
-        )
-      ) {
-        next({ name: "NotFound" });
       } else {
-        next();
+        await store.dispatch("auth/verifyRecoverToken", from.query.token);
+        if (
+          store.getters.errorByNamespace(
+            Namespaces.AUTH.NAMESPACE_RECOVER_TOKEN_VERIFY
+          )
+        ) {
+          next({ name: "MainPage" });
+        } else {
+          next();
+        }
       }
     },
   },
