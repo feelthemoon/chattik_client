@@ -138,6 +138,8 @@ router.beforeEach(
     await store.commit("CLEAR_ERRORS");
     if (!to.meta.needsAuth && localStorage.getItem("login")) {
       next({ name: "MainPage" });
+    } else if (to.meta.needsAuth && !localStorage.getItem("login")) {
+      next({ name: "SigninPage" });
     } else {
       next();
     }
