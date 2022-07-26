@@ -30,7 +30,12 @@
                 </a-switch>
               </a-menu-item>
               <a-menu-item disabled>
-                <a-button danger type="text" :style="{ width: '100%' }">
+                <a-button
+                  @click="logoutUser"
+                  danger
+                  type="text"
+                  :style="{ width: '100%' }"
+                >
                   <template #icon><close-outlined></close-outlined></template>
                   <span> {{ $t("layouts.main.sidebar.logout_text") }} </span>
                 </a-button>
@@ -63,6 +68,7 @@ import { useI18n } from "vue-i18n";
 import Icon from "@/components/Icon.vue";
 import SidebarDialog from "@/components/SidebarDialog.vue";
 import SearchUsers from "@/components/SearchUsers.vue";
+import { useStore } from "@/store";
 
 export default defineComponent({
   name: "Sidebar",
@@ -83,6 +89,7 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n();
+    const store = useStore();
     const menuItems = [
       {
         title: t("layouts.main.sidebar.saved_text"),
@@ -102,9 +109,13 @@ export default defineComponent({
     ];
     const isDarkTheme = ref(false);
 
+    const logoutUser = () => {
+      store.dispatch("auth/logout");
+    };
     return {
       menuItems,
       isDarkTheme,
+      logoutUser,
     };
   },
 });

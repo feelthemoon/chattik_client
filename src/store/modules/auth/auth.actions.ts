@@ -10,6 +10,7 @@ import {
   ISignupData,
 } from "@/store/modules/auth/auth.types";
 import { API_AUTH } from "@/api";
+import router from "@/router";
 
 const AuthActions: ActionTree<unknown, IRootState> = {
   async signin({ dispatch }, data: ISigninData) {
@@ -60,12 +61,14 @@ const AuthActions: ActionTree<unknown, IRootState> = {
 
   async logout({ dispatch, rootGetters }) {
     try {
+      localStorage.clear();
       dispatch(
         "updateLoading",
         { namespace: Namespaces.AUTH.NAMESPACE_LOGOUT, loading: true },
         { root: true }
       );
       await API_AUTH.logout(rootGetters.token);
+      await router.push({ name: "SigninPage" });
     } catch (e: unknown) {
       dispatch(
         "updateErrors",
