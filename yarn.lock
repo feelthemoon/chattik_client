@@ -4791,6 +4791,11 @@ elliptic@^6.5.3:
     minimalistic-assert "^1.0.1"
     minimalistic-crypto-utils "^1.0.1"
 
+emoji-picker-element@^1.10.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/emoji-picker-element/-/emoji-picker-element-1.12.1.tgz#854a9bbae4d9a04fa2b5cd0763845921f4904c83"
+  integrity sha512-F9AY/re8uqZmBcCXLHLGvyy7fxuMQdZl9R8OToLRH8Vnns+WMX8RYUbI2nSJklzl5+82qzpYWeus1/puDepWcQ==
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
@@ -12223,7 +12228,7 @@ vue-cli-plugin-svg-sprite@^1.1.0:
   dependencies:
     svg-sprite-loader "^6.0.0"
 
-vue-demi@^0.12.0:
+vue-demi@^0.12.0, vue-demi@^0.12.4:
   version "0.12.5"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.5.tgz#8eeed566a7d86eb090209a11723f887d28aeb2d1"
   integrity sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==
@@ -12349,6 +12354,14 @@ vue@^3.0.0:
     "@vue/runtime-dom" "3.2.36"
     "@vue/server-renderer" "3.2.36"
     "@vue/shared" "3.2.36"
+
+vuemoji-picker@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vuemoji-picker/-/vuemoji-picker-0.1.4.tgz#e8410e0f2e2cfadf21d79210b04149962913b334"
+  integrity sha512-gy+MkjcUn92mBENC4b/zqNMW0oz+F005KTf7mWhe1DVUuNhJVsEG2VPJQBIOa7yg+Owd68v7CBrF5TDf45jjzw==
+  dependencies:
+    emoji-picker-element "^1.10.1"
+    vue-demi "^0.12.4"
 
 vuex@^4.0.0-0:
   version "4.0.2"
